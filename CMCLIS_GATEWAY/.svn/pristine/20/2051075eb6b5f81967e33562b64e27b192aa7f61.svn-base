@@ -1,0 +1,75 @@
+﻿<?xml version="1.0"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <configSections>
+    <sectionGroup name="system.serviceModel" type="System.ServiceModel.Configuration.ServiceModelSectionGroup, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="standardEndpoints" type="System.ServiceModel.Configuration.StandardEndpointsSection, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    </sectionGroup>
+    <section name="RedisConfiguration" type="Configuration.RedisConfigurationSection, Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+  </configSections>
+  <appSettings configSource="Setting.config"/>
+  <!--
+    For a description of web.config changes for .NET 4.5 see http://go.microsoft.com/fwlink/?LinkId=235367.
+
+    The following attributes can be set on the <httpRuntime> tag.
+      <system.Web>
+        <httpRuntime targetFramework="4.5" />
+      </system.Web>
+  -->
+  <system.web>
+    <compilation debug="true" targetFramework="4.5"/>
+    <authentication mode="None"/>
+    <customErrors mode="RemoteOnly" defaultRedirect="mycustompage.htm"/>
+    <httpRuntime enable="true" executionTimeout="999999" maxRequestLength="2097151" maxUrlLength="560000" maxQueryStringLength="2048000"/>
+    <pages controlRenderingCompatibilityVersion="4.0"/>
+  </system.web>
+  <system.webServer>
+    <modules runAllManagedModulesForAllRequests="true">
+      <add name="UrlRoutingModule" type="System.Web.Routing.UrlRoutingModule, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+      <remove name="WebDAVModule"/>
+    </modules>
+    <httpRedirect enabled="false"/>
+    <security>
+      <requestFiltering>
+        <requestLimits maxQueryString="2048000"/>
+      </requestFiltering>
+    </security>
+    <handlers>
+      <remove name="ExtensionlessUrl-Integrated-4.0"/>
+      <remove name="ExtensionlessUrl-ISAPI-4.0_32bit"/>
+      <remove name="WebDAV"/>
+      <add name="ExtensionlessUrl-ISAPI-4.0_32bit" path="*." verb="GET,HEAD,POST,DEBUG,PUT,DELETE" modules="IsapiModule" scriptProcessor="C:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_isapi.dll" resourceType="Unspecified" requireAccess="Script" preCondition="classicMode,runtimeVersionv4.0,bitness32" responseBufferLimit="0"/>
+      <add name="ExtensionlessUrl-Integrated-4.0" path="*." verb="GET,HEAD,POST,DEBUG,PUT,DELETE" type="System.Web.Handlers.TransferRequestHandler" resourceType="Unspecified" requireAccess="Script" preCondition="integratedMode,runtimeVersionv4.0"/>
+    </handlers>
+    <!--<tracing>
+      <traceFailedRequests>
+        <add path="*">
+          <traceAreas>
+            <add provider="ASP" verbosity="Verbose" />
+            <add provider="ASPNET" areas="Infrastructure,Module,Page,AppServices" verbosity="Verbose" />
+            <add provider="ISAPI Extension" verbosity="Verbose" />
+            <add provider="WWW Server" areas="Authentication,Security,Filter,StaticFile,CGI,Compression,Cache,RequestNotifications,Module" verbosity="Verbose" />
+          </traceAreas>
+          <failureDefinitions timeTaken="00:00:00" statusCodes="405" />
+        </add>
+      </traceFailedRequests>
+    </tracing>-->
+    <staticContent>
+      <!--<mimeMap fileExtension=".json" mimeType="application/json" />-->
+    </staticContent>
+    <directoryBrowse enabled="true"/>
+  </system.webServer>
+  <system.serviceModel>
+    <serviceHostingEnvironment aspNetCompatibilityEnabled="true" multipleSiteBindingsEnabled="True"/>
+    <standardEndpoints>
+      <webHttpEndpoint>
+        <standardEndpoint name="" helpEnabled="true" crossDomainScriptAccessEnabled="true" automaticFormatSelectionEnabled="false" maxReceivedMessageSize="2000000000">
+          <readerQuotas maxStringContentLength="2147483647"/>
+        </standardEndpoint>
+      </webHttpEndpoint>
+    </standardEndpoints>
+  </system.serviceModel>
+</configuration>

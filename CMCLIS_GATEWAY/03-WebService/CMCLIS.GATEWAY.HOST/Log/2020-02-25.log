@@ -1,0 +1,277 @@
+
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+{
+  "Guid":"1a1dfc9d-6e22-450c-8320-fcd6444cefbd",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 1:58:20 PM",
+  "Source":"[CVAN_MAILInfo]",
+  "Message":"Input string was not in a correct format.",
+  "StackTrace":"   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)\r\n   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)\r\n   at System.Int32.Parse(String s)\r\n   at CMCLIS.GATEWAY.SERVICES.API_EMAIL.CVAN_MAILInfo(String CVAN_FROM, String CVAN_TO, String CVAN_SUBJECT, String CVAN_TYPE_CODE, String CVAN_STATUS) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SERVICES\\API_EMAIL\\API_EMAIL.cs:line 60",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 1:58:20 PM"
+},
+
+  "Message":"ORA-12170: TNS:Connect timeout occurred",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+{
+  "Guid":"d7e48eed-b194-4dc4-84a0-1444770c6b8d",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:11:48 PM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>23</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,CVAN_CODE,CVAN_MSGO_CODE,CVAN_MSG_TYPE_CODE,CVAN_MSG_TYPE_NAME,CVAN_CONTENT_XML,CVAN_STATUS_CODE,CVAN_STATUS_NAME,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>CVAN_CODE:CVAN01</str><str>CVAN_MSGO_CODE:CVAN02</str><str>CVAN_MSG_TYPE_CODE:{HO_SO_DIA_CHINH}</str><str>CVAN_STATUS_CODE:0</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>2147483647</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>org.apache.solr.search.SyntaxError: Cannot parse 'CVAN_MSG_TYPE_CODE:{HO_SO_DIA_CHINH}': Encountered ' '}' '} '' at line 1, column 35.\r\nWas expecting one of:\r\n    'TO' ...\r\n    &lt;RANGE_QUOTED&gt; ...\r\n    &lt;RANGE_GOOP&gt; ...\r\n    </str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:11:48 PM"
+},
+{
+  "Guid":"a57bec27-b3ca-4b01-9bb1-3f5c354f7bb8",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:11:48 PM",
+  "Source":"[CVAN_MSGI_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.CVAN_MSGIDao.CVAN_MSGI_QuerySolr_GetAllWithPadding(String keyword, String _CVAN_CODE, String _CVAN_MSGO_CODE, String _CVAN_MSG_TYPE_CODE, String _CVAN_STATUS_CODE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\CVAN_MSGIDao.cs:line 149",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:11:48 PM"
+},
+{
+  "Guid":"e33156e2-f61e-4572-ad61-d0be57dae110",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:15:16 PM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>8</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,CVAN_CODE,CVAN_MSGO_CODE,CVAN_MSG_TYPE_CODE,CVAN_MSG_TYPE_NAME,CVAN_CONTENT_XML,CVAN_STATUS_CODE,CVAN_STATUS_NAME,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>CVAN_CODE:CVAN01</str><str>CVAN_MSGO_CODE:CVAN02</str><str>CVAN_MSG_TYPE_CODE:{HO_SO_DIA_CHINH}</str><str>CVAN_STATUS_CODE:0</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>2147483647</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>org.apache.solr.search.SyntaxError: Cannot parse 'CVAN_MSG_TYPE_CODE:{HO_SO_DIA_CHINH}': Encountered ' '}' '} '' at line 1, column 35.\r\nWas expecting one of:\r\n    'TO' ...\r\n    &lt;RANGE_QUOTED&gt; ...\r\n    &lt;RANGE_GOOP&gt; ...\r\n    </str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:15:16 PM"
+},
+{
+  "Guid":"4a3a12ad-4ef3-45ef-a12a-7eeb53a7ef1a",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:15:16 PM",
+  "Source":"[CVAN_MSGI_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.CVAN_MSGIDao.CVAN_MSGI_QuerySolr_GetAllWithPadding(String keyword, String _CVAN_CODE, String _CVAN_MSGO_CODE, String _CVAN_MSG_TYPE_CODE, String _CVAN_STATUS_CODE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\CVAN_MSGIDao.cs:line 149",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:15:16 PM"
+},
+{
+  "Guid":"33066ee8-f783-49c6-94d1-da50aecdca98",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:16:13 PM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>5</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,CVAN_CODE,CVAN_MSGO_CODE,CVAN_MSG_TYPE_CODE,CVAN_MSG_TYPE_NAME,CVAN_CONTENT_XML,CVAN_STATUS_CODE,CVAN_STATUS_NAME,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>CVAN_CODE:CVAN01</str><str>CVAN_MSGO_CODE:CVAN02</str><str>CVAN_MSG_TYPE_CODE:{HO_SO_DIA_CHINH}</str><str>CVAN_STATUS_CODE:0</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>2147483647</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>org.apache.solr.search.SyntaxError: Cannot parse 'CVAN_MSG_TYPE_CODE:{HO_SO_DIA_CHINH}': Encountered ' '}' '} '' at line 1, column 35.\r\nWas expecting one of:\r\n    'TO' ...\r\n    &lt;RANGE_QUOTED&gt; ...\r\n    &lt;RANGE_GOOP&gt; ...\r\n    </str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:16:13 PM"
+},
+{
+  "Guid":"a26bb379-2801-4bc7-a48f-e81d64d42e97",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:16:13 PM",
+  "Source":"[CVAN_MSGI_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.CVAN_MSGIDao.CVAN_MSGI_QuerySolr_GetAllWithPadding(String keyword, String _CVAN_CODE, String _CVAN_MSGO_CODE, String _CVAN_MSG_TYPE_CODE, String _CVAN_STATUS_CODE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\CVAN_MSGIDao.cs:line 149",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:16:13 PM"
+},
+{
+  "Guid":"b0f2195c-4fe1-49c2-bae9-813c5a2937a9",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:21:08 PM",
+  "Source":"[GetInfo LOG_CHUC_NANG:ERROR SQL Exception:]",
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.CORE.Provider.OracleBaseImpl`1.GetInfo(Int32 id) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Provider\\OracleBaseImpl.cs:line 634",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:21:08 PM"
+},
+{
+  "Guid":"ee5a12f7-0d31-4bbf-a3f8-f7634fe8f98f",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:21:08 PM",
+  "Source":"[LOG_CHUC_NANG_GetInfo]",
+  "Message":"Server đang quá tải, bạn vui lòng thực hiện lại thao tác sau ít phút.",
+  "StackTrace":"   at CMCLIS.GATEWAY.CORE.Provider.OracleBaseImpl`1.GetInfo(Int32 id) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Provider\\OracleBaseImpl.cs:line 646\r\n   at CMCLIS.GATEWAY.SERVICES.API_LOG.LOG_CHUC_NANG_GetInfo(String ID) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SERVICES\\API_LOG\\API_LOG.cs:line 108",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:21:08 PM"
+},
+
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+{
+  "Guid":"7ac9ccfe-51aa-499a-b2ab-902b5aac7c89",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:25:17 PM",
+  "Source":"[GetInfo LOG_CHUC_NANG:ERROR SQL Exception:]",
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.CORE.Provider.OracleBaseImpl`1.GetInfo(Int32 id) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Provider\\OracleBaseImpl.cs:line 634",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:25:17 PM"
+},
+{
+  "Guid":"2f6c565f-6bf8-4f9d-97b7-2c83f7a1f386",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:25:17 PM",
+  "Source":"[LOG_CHUC_NANG_GetInfo]",
+  "Message":"Server đang quá tải, bạn vui lòng thực hiện lại thao tác sau ít phút.",
+  "StackTrace":"   at CMCLIS.GATEWAY.CORE.Provider.OracleBaseImpl`1.GetInfo(Int32 id) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Provider\\OracleBaseImpl.cs:line 646\r\n   at CMCLIS.GATEWAY.SERVICES.API_LOG.LOG_CHUC_NANG_GetInfo(String ID) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SERVICES\\API_LOG\\API_LOG.cs:line 108",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:25:17 PM"
+},
+{
+  "Guid":"dd6e82d2-f1b5-4b1a-ae38-54217610b649",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:25:46 PM",
+  "Source":"[GetInfo LOG_CHUC_NANG:ERROR SQL Exception:]",
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.CORE.Provider.OracleBaseImpl`1.GetInfo(Int32 id) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Provider\\OracleBaseImpl.cs:line 634",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:25:46 PM"
+},
+{
+  "Guid":"8e8883fb-621a-48d7-86b3-b3540c6b790f",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:25:54 PM",
+  "Source":"[LOG_CHUC_NANG_GetInfo]",
+  "Message":"Server đang quá tải, bạn vui lòng thực hiện lại thao tác sau ít phút.",
+  "StackTrace":"   at CMCLIS.GATEWAY.CORE.Provider.OracleBaseImpl`1.GetInfo(Int32 id) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Provider\\OracleBaseImpl.cs:line 646\r\n   at CMCLIS.GATEWAY.SERVICES.API_LOG.LOG_CHUC_NANG_GetInfo(String ID) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SERVICES\\API_LOG\\API_LOG.cs:line 108",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:25:54 PM"
+},
+{
+  "Guid":"cd0ac5ad-538a-4a04-a499-8ba0a434039f",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:28:55 PM",
+  "Source":"[GetInfo LOG_CHUC_NANG:ERROR SQL Exception:]",
+  "Message":"ORA-12569: TNS:packet checksum failure",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.CORE.Provider.OracleBaseImpl`1.GetInfo(Int32 id) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Provider\\OracleBaseImpl.cs:line 634",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:28:57 PM"
+},
+
+  "Message":"ORA-12170: TNS:Connect timeout occurred",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12170: TNS:Connect timeout occurred",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12170: TNS:Connect timeout occurred",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+{
+  "Guid":"3c2dc96a-f26a-4e03-993f-9dcda2946cf3",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:33:22 PM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>8</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,CVAN_CODE,CVAN_MSGO_CODE,CVAN_MSG_TYPE_CODE,CVAN_MSG_TYPE_NAME,CVAN_CONTENT_XML,CVAN_STATUS_CODE,CVAN_STATUS_NAME,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>CVAN_CODE:CVAN01</str><str>CVAN_MSGO_CODE:CVAN02</str><str>CVAN_MSG_TYPE_CODE:{HO_SO_DIA_CHINH}</str><str>CVAN_STATUS_CODE:0</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>2147483647</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>org.apache.solr.search.SyntaxError: Cannot parse 'CVAN_MSG_TYPE_CODE:{HO_SO_DIA_CHINH}': Encountered ' '}' '} '' at line 1, column 35.\r\nWas expecting one of:\r\n    'TO' ...\r\n    &lt;RANGE_QUOTED&gt; ...\r\n    &lt;RANGE_GOOP&gt; ...\r\n    </str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:33:22 PM"
+},
+{
+  "Guid":"2492c01a-7785-494f-a43f-9e5397fb5f67",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 3:33:22 PM",
+  "Source":"[CVAN_MSGI_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.CVAN_MSGIDao.CVAN_MSGI_QuerySolr_GetAllWithPadding(String keyword, String _CVAN_CODE, String _CVAN_MSGO_CODE, String _CVAN_MSG_TYPE_CODE, String _CVAN_STATUS_CODE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\CVAN_MSGIDao.cs:line 149",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 3:33:22 PM"
+},
+{
+  "Guid":"ac25bbc2-8680-423a-9234-eefd4d27650b",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 4:41:42 PM",
+  "Source":"[Download]",
+  "Message":"The remote server returned an error: (550) File unavailable (e.g., file not found, no access).",
+  "StackTrace":"   at System.Net.FtpWebRequest.SyncRequestCallback(Object obj)\r\n   at System.Net.FtpWebRequest.RequestCallback(Object obj)\r\n   at System.Net.CommandStream.Dispose(Boolean disposing)\r\n   at System.IO.Stream.Close()\r\n   at System.IO.Stream.Dispose()\r\n   at System.Net.ConnectionPool.Destroy(PooledStream pooledStream)\r\n   at System.Net.ConnectionPool.PutConnection(PooledStream pooledStream, Object owningObject, Int32 creationTimeout, Boolean canReuse)\r\n   at System.Net.FtpWebRequest.FinishRequestStage(RequestStage stage)\r\n   at System.Net.FtpWebRequest.GetResponse()\r\n   at CMCLIS.GATEWAY.CORE.FTPClient.Download(String ftpServerUri, String ftpUserID, String ftpPassword, String filePath, String fileName) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Utility\\FTPClient.cs:line 166",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 4:41:42 PM"
+},
+
+  "Message":"ORA-12170: TNS:Connect timeout occurred",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12170: TNS:Connect timeout occurred",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+
+  "Message":"ORA-12170: TNS:Connect timeout occurred",
+  "StackTrace":"   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, Object src, OracleLogicalTransaction m_oracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleConnectionOCP.Open(OracleConnection con)\r\n   at Oracle.DataAccess.Client.OracleConnection.Open()\r\n   at CMCLIS.GATEWAY.SETTING.Config.get_ORACLEGetInfoIndexLucene() in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SETTING\\Config.cs:line 615",
+{
+  "Guid":"7c6283e1-5811-4b61-916d-d77a41bcf228",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/25/2020 4:44:59 PM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"Unable to connect to the remote server",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/25/2020 4:44:59 PM"
+},

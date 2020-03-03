@@ -1,0 +1,16 @@
+C:\Users\HTHANG\source\repos\TestXml\TestXml\bin\Debug\TestXml.exe.config
+C:\Users\HTHANG\source\repos\TestXml\TestXml\bin\Debug\TestXml.exe
+C:\Users\HTHANG\source\repos\TestXml\TestXml\bin\Debug\TestXml.pdb
+C:\Users\HTHANG\source\repos\TestXml\TestXml\obj\Debug\TestXml.csproj.CoreCompileInputs.cache
+C:\Users\HTHANG\source\repos\TestXml\TestXml\obj\Debug\TestXml.exe
+C:\Users\HTHANG\source\repos\TestXml\TestXml\obj\Debug\TestXml.pdb
+C:\Users\HTHANG\source\repos\TestXml\TestXml\obj\Debug\TestXml.csprojAssemblyReference.cache
+E:\CMCLIS\HTHANG\TestXml\TestXml\bin\Debug\TestXml.exe.config
+E:\CMCLIS\HTHANG\TestXml\TestXml\bin\Debug\TestXml.exe
+E:\CMCLIS\HTHANG\TestXml\TestXml\bin\Debug\TestXml.pdb
+E:\CMCLIS\HTHANG\TestXml\TestXml\bin\Debug\RabbitMQ.Client.dll
+E:\CMCLIS\HTHANG\TestXml\TestXml\bin\Debug\RabbitMQ.Client.xml
+E:\CMCLIS\HTHANG\TestXml\TestXml\obj\Debug\TestXml.csproj.CoreCompileInputs.cache
+E:\CMCLIS\HTHANG\TestXml\TestXml\obj\Debug\TestXml.csproj.CopyComplete
+E:\CMCLIS\HTHANG\TestXml\TestXml\obj\Debug\TestXml.exe
+E:\CMCLIS\HTHANG\TestXml\TestXml\obj\Debug\TestXml.pdb

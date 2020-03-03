@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>    
+    <add key="CONNECTION_STRING_CSKH" value="Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP) (HOST=10.162.20.249)(PORT=1523))) (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=KTNB4))); User Id=CMC_CSKH;Password=CMC_CSKH;" />
+    <add key="ORACLE_OWNER" value="CVAN"/>
+    <add key="MAX_FIELD_LENGTH" value="10"/>
+    <add key="FILE_NAME_LOCK_LUCENE" value="write.lock"/>
+    <add key="FILE_UPLOAD_EXTENSIVE" value="*.xls|*.xlsx|*.xlt"/>
+    <add key="VERSION" value="VERSION : 1.0"/>
+    <add key="SOFTWARE_NAME" value="CMCLIS-VAN"/>
+    <add key="ASSEMBLY_NAME" value=""/>
+    <add key="NAMESPACE_NAME" value=""/>
+    <add key="SOLR_URL" value=""/>
+    <add key="SOLR_PAGE_SIZE" value="20"/>
+    <add key="PAGE_SIZE" value="100"/>s
+    <add key="USING_ENVIROMENT" value="app"/>
+    <!--EMAIL_EXCHANGE Setting-->
+    <add key="WEB_SERVICE" value="https://webmail.cmc.com.vn/EWS/Exchange.asmx" />
+    <add key="DOMAIN" value="csoft" />
+    <add key="CMCSOFT_MAIL" value="ivancskh@cmc.com.vn" />
+    <add key="USERNAME" value="ivancskh" />
+    <add key="PASSWORD" value="cmc@2015" />    
+  </appSettings>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+  </startup>
+</configuration>
+

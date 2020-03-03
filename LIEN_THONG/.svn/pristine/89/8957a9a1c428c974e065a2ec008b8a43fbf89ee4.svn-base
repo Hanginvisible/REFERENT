@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="Interval" value="10000" />
+    <add key="MICRO_SERVICE_PORT" value="8864" />
+    <add key="MICRO_SERVICE_NAME" value="CVAN_Upload" />
+    <add key="MICRO_SERVICE_DISPLAY_NAME" value="Upload File Cvan" />
+    <add key="MICRO_SERVICE_MAXLENGTH_MESSAGESIZE" value="1024000000" />
+
+    <!--public const string FTP_USING = "FTP_USING";-->
+    <!--public const string FTP_SERVER_URI = "FTP_SERVER_URI";
+    public const string FTP_USER = "FTP_USER";
+    public const string FTP_PASSWORD = "FTP_PASSWORD";-->
+    <add key="FTP_USING" value="" />
+    <add key="FTP_SERVER_URI" value="ftp://localhost/" />
+    <add key="FTP_USER" value="" />
+    <add key="FTP_PASSWORD" value="" />
+    <add key="FTP_DOWNLOAD_FILE" value="D:\FTP\DownloadFile" />
+  </appSettings>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+</configuration>

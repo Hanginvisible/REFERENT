@@ -1,0 +1,247 @@
+﻿using CVAN.GW.Core;
+using CVAN.GW.DataObjects;
+using CVAN.GW.Entity;
+using CVAN.GW.Setting;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.ServiceProcess;
+using System.Text;
+using System.Threading.Tasks;
+using System.Timers;
+using System.Xml;
+
+
+namespace CVAN.GW.WServiceSendMail
+{
+    public partial class ServiceSendMail : ServiceBase
+    {
+        private string configPath = string.Empty;
+        private Timer timer = null;
+        DataSet dsTasks = new DataSet();
+        public ServiceSendMail()
+        {
+            InitializeComponent();
+            timer = new Timer();
+
+            this.timer.Interval = int.Parse(ConfigurationManager.AppSettings["INTERVAL"]);
+            this.timer.Elapsed += new System.Timers.ElapsedEventHandler(this.timer_Tick);
+            //TEST();
+        }
+
+        private void TEST()
+        {
+            int totalRecord = 0;
+            List<CVAN_MAILInfo> listData = DataObjectFactory.GetInstanceCVAN_MAIL().CVAN_MAIL_GetAllWithPadding(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 100, ref totalRecord);
+            if (listData != null && listData.Count > 0)
+            {
+                List<int> listPage = Utility.GetListPage(listData.Count, int.Parse(Config.PAGE_SIZE));
+                Task[] tasks = new Task[listPage.Count];
+                int ctr = 0;
+                foreach (var item in listPage)
+                {
+                    var task = Task.Factory.StartNew(() => DoSomeWork(item, int.Parse(Config.PAGE_SIZE), listData));
+                    tasks[ctr] = task;
+                    ctr++;
+
+                }
+                var result = Task.Factory.ContinueWhenAll(tasks,
+                 (taskResult) =>
+                 {
+                     try
+                     {
+                         Task.WaitAll(taskResult);
+                     }
+                     catch (Exception ex)
+                     {
+                         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                         var faultedTasks = tasks.Where(t => t.IsFaulted);
+                     }
+
+                 });
+            }
+
+        }
+
+        private List<CVAN_MAILInfo> GetListDataByPageIndex(int pageIndex, int pageSize, List<CVAN_MAILInfo> listData)
+        {
+            try
+            {
+                List<CVAN_MAILInfo> childList = new List<CVAN_MAILInfo>();
+                if (pageIndex == 1)
+                {
+                    childList = listData.Where(m => m.STT >= (pageIndex - 1) * pageSize && m.STT <= pageIndex * pageSize).ToList();
+                }
+                else
+                {
+                    childList = listData.Where(m => m.STT > (pageIndex - 1) * pageSize && m.STT <= pageIndex * pageSize).ToList();
+                }
+                return childList;
+            }
+            catch (Exception ex)
+            {
+
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+            }
+        }
+
+        private void DoSomeWork(int pageIndex, int pageSize, List<CVAN_MAILInfo> listData)
+        {
+            try
+            {
+                List<CVAN_MAILInfo> childList = GetListDataByPageIndex(pageIndex, pageSize, listData);
+                if (childList != null && childList.Count > 0)
+                {
+                    foreach (var info in childList)
+                    {
+                        bool result = false;
+                        if (info.CVAN_TYPE_CODE == "BHXH_SUBJECT_BAO_CAO_VAN_HANH" 
+                            || info.CVAN_TYPE_CODE == "BHXH_SUBJECT_BHXHHN_SEND_MAIL")
+                        {
+                            byte[] byteArray = null;
+                            if (Config.NETWORK_SAVE_USING == "True")
+                            {
+                                byteArray = FileProcess.FileToByteArrayFromNetwork(Config.NETWORK_SHARE_DIRECTORY, info.CVAN_DESCRIPTION, Config.NETWORK_SHARE_IP, Config.NETWORK_SHARE_ACCOUNT, Config.NETWORK_SHARE_PASSWORD);
+                            }
+                            else
+                            {
+                                byteArray = FileProcess.FileToByteArray(info.CVAN_DESCRIPTION);
+                            }
+                            if (byteArray != null)
+                            {                                
+                                string[] arr = info.CVAN_DESCRIPTION.Split('\\');
+                                string fileName = arr[arr.Length - 1];
+                                CVAN.GW.SendMail.MailService.SendEmailAttachment(info.CVAN_TO, info.CVAN_SUBJECT, info.CVAN_CONTENT, byteArray, fileName, ref result);
+                                System.Threading.Thread.Sleep(int.Parse(ConfigurationManager.AppSettings["MAIL_SLEEP"]));
+                            }
+                        }
+                        else
+                        {
+                            CVAN.GW.SendMail.MailService.SendMailFromExchange(info.CVAN_TO, info.CVAN_SUBJECT, info.CVAN_CONTENT, ref result);
+                            System.Threading.Thread.Sleep(int.Parse(ConfigurationManager.AppSettings["MAIL_SLEEP"]));
+                        }
+                        info.CVAN_LDate = DateTime.Now;
+                        info.CVAN_LUser = "IVAN";
+                        info.CVAN_STATUS = result == true ? 1 : -1;
+                        DataObjectFactory.GetInstanceCVAN_MAIL().Update(info);
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime currTime = DateTime.Now;
+                foreach (DataRow dRow in dsTasks.Tables["Task"].Rows)
+                {
+                    DateTime runTime = Convert.ToDateTime(dRow["TimeExcute"]);
+                    if (currTime >= runTime)
+                    {
+                        runTime = runTime.AddSeconds(int.Parse(dRow["Interval"].ToString()));
+                        int totalRecord = 0;
+                        List<CVAN_MAILInfo> listData = DataObjectFactory.GetInstanceCVAN_MAIL().CVAN_MAIL_GetAllWithPadding(string.Empty, string.Empty, string.Empty, string.Empty, 0, 1, 100, ref totalRecord);
+                        if (listData != null && listData.Count > 0)
+                        {
+                            List<int> listPage = Utility.GetListPage(listData.Count, int.Parse(Config.PAGE_SIZE));
+                            Task[] tasks = new Task[listPage.Count];
+                            int ctr = 0;
+                            foreach (var item in listPage)
+                            {
+                                var task = Task.Factory.StartNew(() => DoSomeWork(item, int.Parse(Config.PAGE_SIZE), listData));
+                                tasks[ctr] = task;
+                                ctr++;
+
+                            }
+                            var result = Task.Factory.ContinueWhenAll(tasks,
+                             (taskResult) =>
+                             {
+                                 try
+                                 {
+                                     Task.WaitAll(taskResult);
+                                 }
+                                 catch (Exception ex)
+                                 {
+                                     LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                                     var faultedTasks = tasks.Where(t => t.IsFaulted);
+                                 }
+
+                             });
+                        }
+
+                        dRow["TimeExcute"] = runTime.ToString("MM/dd/yyyy HH:mm:ss");
+                        dsTasks.AcceptChanges();
+                        StreamWriter sWrite = new StreamWriter(ConfigurationManager.AppSettings["FOLDER_CONFIG"] + @"\AppScheduler.xml");
+                        XmlTextWriter xWrite = new XmlTextWriter(sWrite);
+                        dsTasks.WriteXml(xWrite);
+                        xWrite.Close();
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+
+            }
+        }
+
+        protected override void OnStart(string[] args)
+        {
+            try
+            {
+                if (File.Exists(ConfigurationManager.AppSettings["FOLDER_CONFIG"] + @"\AppScheduler.xml"))
+                {
+                    XmlTextReader xRead = new XmlTextReader(ConfigurationManager.AppSettings["FOLDER_CONFIG"] + @"\AppScheduler.xml");
+                    XmlValidatingReader xvRead = new XmlValidatingReader(xRead);
+                    xvRead.ValidationType = ValidationType.DTD;
+                    dsTasks.ReadXml(xvRead);
+                    xvRead.Close();
+                    xRead.Close();
+                }
+
+                timer.Enabled = true;
+                timer.Start();
+                LogEventError.LogEvent("Service Started successfully" + "[" + DateTime.Now.ToString() + "]");
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+
+            }
+        }
+
+        protected override void OnStop()
+        {
+            try
+            {
+                timer.Enabled = false;
+                timer.Stop();
+                LogEventError.LogEvent("Service stop successfully" + "[" + DateTime.Now.ToString() + "]");
+            }
+            catch (Exception ex)
+            {
+
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+
+            }
+        }
+    }
+}

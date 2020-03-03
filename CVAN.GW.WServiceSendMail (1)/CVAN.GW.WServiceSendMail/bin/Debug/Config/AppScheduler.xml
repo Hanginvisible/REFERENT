@@ -1,0 +1,6 @@
+<AppSchedule>
+	<Task>		
+		<Interval>60</Interval>
+		<TimeExcute>11/10/2015 15:50:00</TimeExcute>		
+	</Task>	
+</AppSchedule>

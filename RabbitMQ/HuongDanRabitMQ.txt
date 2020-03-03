@@ -1,0 +1,9 @@
+Setup 2 app RabitMQ
+
+chay cmd cd C:\Program Files (x86)\RabbitMQ Server\rabbitmq_server-3.5.6\sbin
+
+chay tiep :rabbitmq-plugins enable rabbitmq_management
+
+port : web :15672 ->connect MQ : 5672
+user mac dinh  : guest/guest
+Khoi tao ueser : mqadmin/mqadmin ->quyen Administrator

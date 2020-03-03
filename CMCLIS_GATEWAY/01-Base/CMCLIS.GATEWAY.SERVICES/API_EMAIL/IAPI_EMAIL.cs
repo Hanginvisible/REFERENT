@@ -1,0 +1,23 @@
+﻿using CMCLIS.GATEWAY.ENTITY;
+using System.ComponentModel;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+
+namespace CMCLIS.GATEWAY.SERVICES
+{
+    [ServiceContract]
+    public interface IAPI_EMAIL
+    {
+        #region Create Functions "GATE_WAY"
+        [OperationContract]
+        [Description("Lấy tất cả thông tin bảng CVAN_MAILInfo theo điều kiện  {CVAN_FROM}/{CVAN_TO}/{CVAN_SUBJECT}/{CVAN_TYPE_CODE}/{CVAN_STATUS}")]
+        [WebGet(UriTemplate = "CVAN_MAILInfo/{CVAN_FROM}/{CVAN_TO}/{CVAN_SUBJECT}/{CVAN_TYPE_CODE}/{CVAN_STATUS}", ResponseFormat = WebMessageFormat.Json)]
+        ResponseList<CVAN_MAILInfo> CVAN_MAILInfo(string CVAN_FROM, string CVAN_TO, string CVAN_SUBJECT, string CVAN_TYPE_CODE, string CVAN_STATUS);
+
+        [OperationContract]
+        [Description("Gửi thông tin của Email tới rabbit MQ")]
+        [WebInvoke(UriTemplate = "CVAN_MAILInfo_POST", Method ="POST", ResponseFormat = WebMessageFormat.Json)]
+        Response CVAN_MAILInfo_POST(CVAN_MAIL info);
+        #endregion
+    }
+}

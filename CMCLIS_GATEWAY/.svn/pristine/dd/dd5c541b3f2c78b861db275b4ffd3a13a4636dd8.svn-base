@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<inv:invoice xmlns:inv="http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+	<inv:invoiceData id="_NODE_TO_SIGN">
+		<inv:invoiceAppRecordId></inv:invoiceAppRecordId>
+		<inv:invoiceType></inv:invoiceType>
+		<inv:templateCode></inv:templateCode>
+		<inv:invoiceSeries></inv:invoiceSeries>
+		<inv:invoiceNumber></inv:invoiceNumber>
+		<inv:invoiceName></inv:invoiceName>
+		<inv:invoiceIssuedDate></inv:invoiceIssuedDate>
+		<inv:signedDate></inv:signedDate>
+		<inv:submittedDate></inv:submittedDate>
+		<inv:currencyCode></inv:currencyCode>
+		<inv:adjustmentType></inv:adjustmentType>
+		<inv:payments></inv:payments>
+		<inv:sellerLegalName></inv:sellerLegalName>
+		<inv:sellerTaxCode></inv:sellerTaxCode>
+		<inv:sellerAddressLine></inv:sellerAddressLine>
+		<inv:sellerDistrictName></inv:sellerDistrictName>
+		<inv:sellerCityName></inv:sellerCityName>
+		<inv:sellerPhoneNumber></inv:sellerPhoneNumber>
+		<inv:sellerBankName></inv:sellerBankName>
+		<inv:sellerBankAccount></inv:sellerBankAccount>
+		<inv:sellerContactPersonName></inv:sellerContactPersonName>
+		<inv:buyerLegalName></inv:buyerLegalName>
+		<inv:buyerTaxCode></inv:buyerTaxCode>
+		<inv:buyerAddressLine></inv:buyerAddressLine>
+		<inv:items></inv:items>
+		<inv:invoiceTaxBreakdowns></inv:invoiceTaxBreakdowns>
+		<inv:totalAmountWithoutVAT></inv:totalAmountWithoutVAT>
+		<inv:totalVATAmount></inv:totalVATAmount>
+		<inv:totalAmountWithVAT></inv:totalAmountWithVAT>
+		<inv:totalAmountWithVATInWords></inv:totalAmountWithVATInWords>
+	</inv:invoiceData>		
+</inv:invoice>

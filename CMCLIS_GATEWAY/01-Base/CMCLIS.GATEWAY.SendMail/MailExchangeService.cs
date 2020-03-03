@@ -1,0 +1,274 @@
+﻿using CMCLIS.GATEWAY.CORE;
+using CMCLIS.GATEWAY.ENTITY;
+using Microsoft.Exchange.WebServices.Data;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Text;
+
+namespace CMCLIS.GATEWAY.SendMail
+{
+    public class MailExchangeService
+    {
+
+        public static void SentEmail(string to, string subject, string body, ref bool result)
+        {
+            try
+            {
+                String websvr = ConfigurationManager.AppSettings["WEB_SERVICE"];
+                String domain = ConfigurationManager.AppSettings["DOMAIN"];
+                String cmcsoftmail = ConfigurationManager.AppSettings["CMCSOFT_MAIL"];
+                String username = ConfigurationManager.AppSettings["USERNAME"];
+                String password = ConfigurationManager.AppSettings["PASSWORD"];
+                ServicePointManager.ServerCertificateValidationCallback = CertificateValidationCallBack;
+                ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2007_SP1);
+                service.Credentials = new WebCredentials(username, password, domain);
+
+                // service.AutodiscoverUrl("username@yourdomain.com", RedirectionUrlValidationCallback);
+                service.Url = new System.Uri(websvr);
+
+                EmailMessage email = new EmailMessage(service);
+                email.ToRecipients.Add(to);
+                email.Subject = subject;
+                email.Body = new MessageBody(BodyType.HTML, body);
+
+                email.Send();
+                result = true;
+                //return statusMsg;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+            }
+
+        }
+
+        public static string GetEmail()
+        {
+            try
+            {
+                string statusMsg = "emails grabbed!";
+                String websvr = ConfigurationManager.AppSettings["WEB_SERVICE"];
+                String domain = ConfigurationManager.AppSettings["DOMAIN"];
+                String cmcsoftmail = ConfigurationManager.AppSettings["CMCSOFT_MAIL"];
+                String username = ConfigurationManager.AppSettings["USERNAME"];
+                String password = ConfigurationManager.AppSettings["PASSWORD"];
+                ServicePointManager.ServerCertificateValidationCallback = CertificateValidationCallBack;
+
+                ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2007_SP1);
+                service.Credentials = new WebCredentials(username, password, domain);
+                // service.AutodiscoverUrl("username@yourdomain.com", RedirectionUrlValidationCallback);
+                service.Url = new System.Uri(websvr);
+
+                //filter
+                // Add a search filter that searches on the body or subject.
+                List<SearchFilter> searchFilterCollection = new List<SearchFilter>();
+                searchFilterCollection.Add(new SearchFilter.ContainsSubstring(ItemSchema.Subject, "A Subject"));
+                //searchFilterCollection.Add(new SearchFilter.ContainsSubstring(ItemSchema.Body, "Some Body"));
+
+                // Create the search filter.
+                SearchFilter searchFilter = new SearchFilter.SearchFilterCollection(LogicalOperator.Or, searchFilterCollection.ToArray());
+
+                var inbox = new FolderId(WellKnownFolderName.Inbox);
+                var iv = new ItemView(10);
+
+                var items = service.FindItems(inbox, searchFilter, iv);
+
+                statusMsg = items.TotalCount.ToString();
+
+                foreach (EmailMessage msg in items.Take(10))
+                {
+
+                    statusMsg = statusMsg + msg.Subject + " -- ";
+
+                }
+
+                return statusMsg;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return string.Empty;
+            }
+
+        }
+
+        private static bool RedirectionUrlValidationCallback(string redirectionUrl)
+        {
+            // The default for the validation callback is to reject the URL.
+            bool result = false;
+
+            Uri redirectionUri = new Uri(redirectionUrl);
+
+            // Validate the contents of the redirection URL. In this simple validation
+            // callback, the redirection URL is considered valid if it is using HTTPS
+            // to encrypt the authentication credentials. 
+            if (redirectionUri.Scheme == "https")
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        private static bool CertificateValidationCallBack(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        {
+            // If the certificate is a valid, signed certificate, return true.
+            if (sslPolicyErrors == System.Net.Security.SslPolicyErrors.None)
+            {
+                return true;
+            }
+
+            // If there are errors in the certificate chain, look at each error to determine the cause.
+            if ((sslPolicyErrors & System.Net.Security.SslPolicyErrors.RemoteCertificateChainErrors) != 0)
+            {
+                if (chain != null && chain.ChainStatus != null)
+                {
+                    foreach (System.Security.Cryptography.X509Certificates.X509ChainStatus status in chain.ChainStatus)
+                    {
+                        if ((certificate.Subject == certificate.Issuer) &&
+                           (status.Status == System.Security.Cryptography.X509Certificates.X509ChainStatusFlags.UntrustedRoot))
+                        {
+                            // Self-signed certificates with an untrusted root are valid. 
+                            continue;
+                        }
+                        else
+                        {
+                            if (status.Status != System.Security.Cryptography.X509Certificates.X509ChainStatusFlags.NoError)
+                            {
+                                // If there are any other errors in the certificate chain, the certificate is invalid,
+                                // so the method returns false.
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+                // When processing reaches this line, the only errors in the certificate chain are 
+                // untrusted root errors for self-signed certificates. These certificates are valid
+                // for default Exchange server installations, so return true.
+                return true;
+            }
+            else
+            {
+                // In all other cases, return false.
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// nhtoan3: hàm gửi mail bằng SMTP không đính kèm file
+        /// </summary>
+        /// <param name="Email_To"></param>
+        /// <param name="Email_Subject"></param>
+        /// <param name="Email_body"></param>
+        /// <param name="result"></param>
+        public static void SendMail_SMTP(string Email_To, string Email_Subject, string Email_body, ref bool result)
+        {
+            try
+            {
+                string CMC_mailTo = Email_To;
+                string CMC_subject = Email_Subject;
+                string CMC_htmlBody = Email_body;
+
+                string CMC_eMailFrom = ConfigurationManager.AppSettings["SEND_MAIL_ADDRESS"];
+                string CMC_ePassword = ConfigurationManager.AppSettings["SEND_MAIL_PASSWORD"];
+                string CMC_eHost = ConfigurationManager.AppSettings["SEND_MAIL_HOST"];
+                int CMC_ePort = int.Parse(ConfigurationManager.AppSettings["SEND_MAIL_PORT"]);
+
+                string CMC_eDisplayname = string.Empty;
+                string CMC_PathAttach = string.Empty;
+                bool CMC_eEnableSsl = true;
+                bool CMC_eUseDefaultCredential = false;
+
+                Utility.SendEmail(CMC_mailTo, CMC_subject, CMC_htmlBody, CMC_PathAttach, CMC_eMailFrom, CMC_ePassword, CMC_eDisplayname, CMC_eHost, CMC_ePort, CMC_eEnableSsl, CMC_eUseDefaultCredential);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                result = false;
+            }
+        }
+
+        /// <summary>
+        /// nhtoan3: Hàm guiwr mail bằng SMTP đính kèm nhiều file 
+        /// </summary>
+        /// <param name="Email_To"></param>
+        /// <param name="Email_Subject"></param>
+        /// <param name="Email_body"></param>
+        /// <param name="Attachments"></param>
+        /// <param name="result"></param>
+        public static void SendMailAttachment_SMTP(string Email_To, string Email_Subject, string Email_body, List<CVAN_MAIL_ATTACHMENT> Attachments, ref bool result)
+        {
+            try
+            {
+                string CMC_mailTo = Email_To;
+                string CMC_subject = Email_Subject;
+                string CMC_htmlBody = Email_body;
+
+                string CMC_eMailFrom = ConfigurationManager.AppSettings["SEND_MAIL_ADDRESS"];
+                string CMC_ePassword = ConfigurationManager.AppSettings["SEND_MAIL_PASSWORD"];
+                string CMC_eHost = ConfigurationManager.AppSettings["SEND_MAIL_HOST"];
+                int CMC_ePort = int.Parse(ConfigurationManager.AppSettings["SEND_MAIL_PORT"]);
+
+                string CMC_eDisplayname = string.Empty;
+
+                bool CMC_eEnableSsl = true;
+                bool CMC_eUseDefaultCredential = false;
+
+                System.Net.Mail.MailMessage message1 = new System.Net.Mail.MailMessage();
+                message1.From = new System.Net.Mail.MailAddress(CMC_eMailFrom, CMC_eDisplayname, Encoding.UTF8);
+                message1.To.Add(new System.Net.Mail.MailAddress(CMC_mailTo));
+                message1.Body = CMC_htmlBody;
+                message1.IsBodyHtml = true;
+                message1.Subject = CMC_subject;
+                message1.Priority = System.Net.Mail.MailPriority.High;
+                // Đính kèm file 
+                System.Net.Mail.Attachment att = null;
+                List<MemoryStream> streams = new List<MemoryStream>();
+                if (Attachments != null && Attachments.Count > 0)
+                {
+                    foreach (var info in Attachments)
+                    {
+                        string Extension = info.Extension;
+                        string FileName = info.FileName;
+                        byte[] Content = System.Convert.FromBase64String(info.Content);
+                        string FullFileName = string.Format("{0}.{1}", FileName, Extension);
+                        att = new System.Net.Mail.Attachment(new MemoryStream(Content), FullFileName);
+                        message1.Attachments.Add(att);
+
+                    }
+                }
+                message1.SubjectEncoding = Encoding.UTF8;
+                message1.BodyEncoding = Encoding.UTF8;
+                //new System.Threading.Thread(() =>
+                //{
+                using (var smtp = new System.Net.Mail.SmtpClient())
+                {
+                    smtp.Host = CMC_eHost;
+                    smtp.Port = CMC_ePort;
+                    smtp.EnableSsl = CMC_eEnableSsl;
+                    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                    smtp.UseDefaultCredentials = CMC_eUseDefaultCredential;
+                    smtp.Credentials = new NetworkCredential(CMC_eMailFrom, CMC_ePassword);
+                    // smtp.SendCompleted += new SendCompletedEventHandler(SendCompletCallBack);
+                    smtp.Send(message1);
+                }
+                //}).Start();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                result = false;
+            }
+
+        }
+    }
+}

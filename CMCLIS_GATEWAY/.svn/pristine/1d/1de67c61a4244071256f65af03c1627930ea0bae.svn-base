@@ -1,0 +1,264 @@
+﻿using CMCLIS.GATEWAY.CORE;
+using CMCLIS.GATEWAY.DATA.OBJECTS;
+using CMCLIS.GATEWAY.ENTITY;
+using CMCLIS.GATEWAY.SETTING;
+using System;
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using System.Xml;
+
+namespace CMCLIS.GATEWAY.GATEWAY.Controllers
+{
+    [EnableCors("*", "*", "*")]
+    public class WebApiController : ApiController
+    {
+        [Route("WebApi/{id}"), HttpGet]
+        public Response Example(string id)
+        {
+            return new Response
+            {
+                ResultCode = Constant.RETURN_CODE_SUCCESS,
+                Message = Constant.MESSAGE_SUCCESS,
+                ReturnValue = id
+            };
+        }
+        /// <summary>
+        /// tra cứu dữ liệu MSGI
+        /// neu gia tri = -1 thi co nghia la bo qua
+        /// </summary>
+        /// created by: ntkien5 07.02.2020
+        [Route("WebApi/MSGI/{cvancode}/{msgocode}/{msgtypecode}/{statuscode}"), HttpGet]
+        public ResponseList<CVAN_MSGIInfo> Service_Load_MSGI(string cvancode, string msgocode, string msgtypecode, string statuscode)
+        {
+            try
+            {
+                int totalCount = 0;
+                cvancode = cvancode.EqualsValue(Config.cstExpectValue) ? "" : cvancode;
+                msgocode = msgocode.EqualsValue(Config.cstExpectValue) ? "" : msgocode;
+                msgtypecode = msgtypecode.EqualsValue(Config.cstExpectValue) ? "" : msgtypecode;
+                statuscode = statuscode.EqualsValue(Config.cstExpectValue) ? "" : statuscode;
+                List<CVAN_MSGIInfo> MSGIInfos = DataObjectFactory.GetInstanceCVAN_MSGI().CVAN_MSGI_QuerySolr_GetAllWithPadding(string.Empty, cvancode, msgocode, msgtypecode, statuscode, 1, int.MaxValue, ref totalCount);
+                ResponseList<CVAN_MSGIInfo> response = new ResponseList<CVAN_MSGIInfo>();
+                response.ResultCode = Constant.RETURN_CODE_SUCCESS;
+                response.Data = MSGIInfos;
+                response.TotalRecords = totalCount;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<CVAN_MSGIInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,                    
+                };
+            }
+        }
+        
+        /// <summary>
+        /// tra cứu dữ liệu MSGO
+        /// neu gia tri = -1 thi co nghia la bo qua
+        /// </summary>
+        /// created by: ntkien5 07.02.2020
+        [Route("WebApi/MSGO/{cvancode}/{msgtypecode}/{sendercode}/{statussend}"), HttpGet]
+        public ResponseList<CVAN_MSGOInfo> Service_Load_MSGO(string cvancode, string msgtypecode, string sendercode, int statussend)
+        {
+            try
+            {
+                int totalCount = 0;
+                cvancode = cvancode.EqualsValue(Config.cstExpectValue) ? "" : cvancode;
+                msgtypecode = msgtypecode.EqualsValue(Config.cstExpectValue) ? "" : msgtypecode;
+                sendercode = sendercode.EqualsValue(Config.cstExpectValue) ? "" : sendercode;
+                List<CVAN_MSGOInfo> MSGOInfos = DataObjectFactory.GetInstanceCVAN_MSGO().CVAN_MSGO_QuerySolr_GetAllWithPadding(string.Empty, cvancode, msgtypecode, sendercode, statussend, 1, int.MaxValue, ref totalCount);
+                ResponseList<CVAN_MSGOInfo> response = new ResponseList<CVAN_MSGOInfo>();
+                response.ResultCode = Constant.RETURN_CODE_SUCCESS;
+                response.Data = MSGOInfos;
+                response.TotalRecords = totalCount;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<CVAN_MSGOInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                };
+            }
+        }
+        /// <summary>
+        /// tra cứu dữ liệu Email
+        /// neu gia tri = -1 thi co nghia la bo qua
+        /// </summary>
+        /// created by: ntkien5 07.02.2020
+        [Route("WebApi/Mail/{cvanfrom}/{cvanto}/{cvansubject}/{cvantypecode}/{cvanstatus}"), HttpGet]
+        public ResponseList<CVAN_MAILInfo> Service_Load_MAIL(string cvanfrom, string cvanto, string cvansubject, string cvantypecode, int cvanstatus)
+        {
+            try
+            {
+                int totalCount = 0;
+                cvanfrom = cvanfrom.EqualsValue(Config.cstExpectValue) ? "" : cvanfrom;
+                cvanto = cvanto.EqualsValue(Config.cstExpectValue) ? "" : cvanto;
+                cvansubject = cvansubject.EqualsValue(Config.cstExpectValue) ? "" : cvansubject;
+                cvantypecode = cvantypecode.EqualsValue(Config.cstExpectValue) ? "" : cvantypecode;
+                List<CVAN_MAILInfo> mails = DataObjectFactory.GetInstanceCVAN_MAIL().CVAN_MAIL_QuerySolr_GetAllWithPadding(string.Empty,cvanfrom, cvanto, cvansubject, cvantypecode, cvanstatus, 1, int.MaxValue, ref totalCount);
+                ResponseList<CVAN_MAILInfo> response = new ResponseList<CVAN_MAILInfo>();
+                response.ResultCode = Constant.RETURN_CODE_SUCCESS;
+                response.Data = mails;
+                response.TotalRecords = totalCount;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<CVAN_MAILInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = ex.Message,
+                };
+            }
+        }
+        ///// <summary>
+        ///// Post XML
+        ///// </summary>
+        ///// <param name="XMLObject">đối tượng lưu nội dung xml được truyền từ các app khác</param>
+        ///// <returns></returns>
+        ///// created by: ntkien5 07.02.2020
+        //[Route("WebApi/PostXML")]
+        //public Response SERVICE_POST_XML(XMLObject xmlObject)
+        //{
+        //    try
+        //    {
+        //        byte[] data = Encoding.UTF8.GetBytes(xmlObject.XMLContent);
+        //        MQProcess.SendDataToMQ(data, Config.MQ_NAME);
+        //        return new Response
+        //        {
+        //            ResultCode = Constant.RETURN_CODE_SUCCESS,
+        //            Message = Constant.MESSAGE_SUCCESS,
+        //            ReturnValue = xmlObject.XMLContent
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response
+        //        {
+        //            ResultCode = Constant.RETURN_CODE_ERROR,
+        //            Message = Constant.MESSAGE_ERROR,
+        //            ReturnValue = ex.Message
+        //        };
+        //    }
+        //}
+
+        /// <summary>
+        /// Post mail
+        /// </summary>
+        /// <param name="SendMail">đối tượng mail</param>
+        /// <returns></returns> 
+        /// created by: ntkien5 07.02.2020
+        [Route("WebApi/PostMail")]
+        public Response SERVICE_POST_Mail(SendMail mailObject)
+        {
+            try
+            {
+                MailObject obj = new MailObject();
+                obj.Subject = mailObject.Subject;
+                obj.EmailTo = mailObject.EmailTo;
+                obj.Content = mailObject.Content;
+                obj.AttachmentContent = mailObject.AttachmentContent;
+                byte[] data = Utility.ArraySerialize<MailObject>(obj);
+                MQProcess.SendDataToMQ(data, Config.MQ_NAME);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_SUCCESS,
+                    Message = Constant.MESSAGE_SUCCESS,
+                    ReturnValue = obj == null ? "string.empty" : obj.Content
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = ex.Message
+                };
+            }
+        }
+
+        [Route("WebApi/TIEP_NHAN_HO_SO")]
+        public Response SERVICE_TIEP_NHAN_HO_SO(SERVICE_REQUEST_INFO _SERVICE_REQUEST_INFO)
+        {
+            try
+            {
+                if (_SERVICE_REQUEST_INFO == null)
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_NOT_FOUND,
+                        ReturnValue = null
+                    };
+                }
+                if (string.IsNullOrEmpty(_SERVICE_REQUEST_INFO.MESSAGE_TYPE))
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_NOT_MESSAGE_TYPE,
+                        ReturnValue = null
+                    };
+                }
+                if (string.IsNullOrEmpty(_SERVICE_REQUEST_INFO.XML_CONTENT))
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_NOT_FOUND,
+                        ReturnValue = null
+                    };
+                }
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(_SERVICE_REQUEST_INFO.XML_CONTENT);
+                XmlNodeList xmlNodeList = xmlDocument.SelectNodes("/DATA/HEADER/MESSAGE_CODE");
+                if (xmlNodeList.Count > 0)
+                {
+                    string maGiaoDich = Guid.NewGuid().ToString().ToUpper();
+                    xmlNodeList[0].InnerText = maGiaoDich;
+                    int result = MQ_PROCESS_DATA.SendToMQ(xmlDocument.OuterXml, null, Config.MQ_NAME);
+                    return new Response
+                    {
+                        ResultCode = result == 1 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result == 1 ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = result == 1 ? maGiaoDich : string.Empty
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_NOT_VALIDATE,
+                        ReturnValue = null
+                    };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = ex.Message
+                };
+
+            }
+
+        }
+        
+    }
+
+
+}

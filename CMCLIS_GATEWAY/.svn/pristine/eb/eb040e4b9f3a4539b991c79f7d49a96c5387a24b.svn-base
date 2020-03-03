@@ -1,0 +1,151 @@
+﻿using System;
+using System.Collections.Generic;
+using SolrNet;
+using Lucene.Net.QueryParsers;
+using Lucene.Net.Analysis.Standard;
+using Oracle.DataAccess.Client;
+using CMCLIS.GATEWAY.ENTITY;
+using CMCLIS.GATEWAY.SETTING;
+using CMCLIS.GATEWAY.CORE;
+using CMCLIS.GATEWAY.CORE.Provider;
+using CMCLIS.GATEWAY.CORE.Solr;
+
+namespace CMCLIS.GATEWAY.DATA.OBJECTS
+{
+	//------------------------------------------------------------------------------------------------------------------------
+	//-- Created By: Ngô Văn Nghị
+	//-- Date: 02/19/2020 11:48:00 AM
+	//-- Todo: 
+	//------------------------------------------------------------------------------------------------------------------------ 
+    public class LOG_DU_LIEU_DBDao : OracleBaseImpl<LOG_DU_LIEU_DBInfo>
+    {
+        protected override void SetInfoDerivedClass()
+        {
+			TableName = "LOG_DU_LIEU_DB";
+			PackageName = "PK_LOG_DU_LIEU_DB";
+			ConnectionString = Config.DictConnectionString[Constant.CONNECTION_STRING_DATA_ORACLE];            
+            LuceneIndexData = Config.ORACLEGetInfoIndexLucene.ContainsKey(TableName) ? Config.ORACLEGetInfoIndexLucene[TableName] : Config.ORACLESetIndexLucene(TableName)[TableName];			
+        }
+
+        #region relationship support
+       
+        #endregion
+
+        #region Get List
+
+        public List<LOG_DU_LIEU_DBInfo> LOG_DU_LIEU_DB_GetAllWithPadding(string _USER_NAME,string _TABLE_NAME,string _ACTION,DateTime _CDATE_START_DATE,DateTime _CDATE_END_DATE,int pageIndex, int pageSize,ref int totalRecord)
+        {
+            OracleParameter[] sqlParam = {
+                                        new OracleParameter("p_USER_NAME",_USER_NAME),
+                                        new OracleParameter("p_TABLE_NAME",_TABLE_NAME),
+                                        new OracleParameter("p_ACTION",_ACTION),
+                                        new OracleParameter("p_CDATE_START_DATE",_CDATE_START_DATE),
+                                        new OracleParameter("p_CDATE_END_DATE",_CDATE_END_DATE),
+                                    };
+            try
+            {
+                List<LOG_DU_LIEU_DBInfo> list = this.ExecuteQuery("usp_GET_ALL_WITH_PADDING", sqlParam, pageIndex, pageSize, ref totalRecord);
+                return list;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+            }
+
+        }
+
+        #endregion
+		
+		#region Using Lucene
+		
+		 public List<LOG_DU_LIEU_DBInfo> LOG_DU_LIEU_DB_GetListByLucene(string keyword, int selectTop)
+        {
+            try
+            {
+                string[] fieldSelect = {"ID","USER_NAME","TABLE_NAME","ACTION","OLD_VALUE","NEW_VALUE","CDATE","LDATE","CUSER","LUSER"};
+                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, fieldSelect, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
+                parser.SetAllowLeadingWildcard(true);
+                parser.SetDefaultOperator(QueryParser.Operator.OR);
+                keyword = keyword + "*";
+                var q = parser.Parse(keyword);
+                return this.Search(q, null, null, selectTop, false);
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+           }
+        }
+		#endregion
+		
+		#region Using Solr
+		
+		 public LOG_DU_LIEU_DBInfo LOG_DU_LIEU_DB_QuerySolr_GetInfo()
+		 {
+		     try
+		     {
+		         List<ISolrQuery> lstFilter = new List<ISolrQuery>();
+		         List<SortOrder> lstOrder = new List<SortOrder>();
+		         lstOrder.Add(new SortOrder("ID", Order.DESC));
+                string[] fieldSelect = {"ID","USER_NAME","TABLE_NAME","ACTION","OLD_VALUE","NEW_VALUE","CDATE","LDATE","CUSER","LUSER"};
+		         int totalRecord = 0;
+		         List<LOG_DU_LIEU_DBInfo> results = QuerySolrBase<LOG_DU_LIEU_DBInfo>.QuerySolr_GetAllWithPadding(Config.SOLR_URL_CORE_BASE + "LOG_DU_LIEU_DB/", string.Empty, lstFilter, fieldSelect, lstOrder, 0, int.Parse(Config.SOLR_PAGE_SIZE), ref totalRecord);
+		         if (results != null && results.Count > 0)
+		         {
+		             return results[0];
+		         }
+		         return null;
+		     }
+		     catch (Exception ex)
+		     {
+		         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+		         return null;
+		     }
+		 }
+
+		 public List<LOG_DU_LIEU_DBInfo> LOG_DU_LIEU_DB_QuerySolr_GetAllWithPadding(string keyword, string _USER_NAME,string _TABLE_NAME,string _ACTION,DateTime _CDATE_START_DATE,DateTime _CDATE_END_DATE, int pageIndex, int pageSize,ref int totalRecord)
+		 {
+		     try
+		     {
+		         List<ISolrQuery> lstFilter = new List<ISolrQuery>();
+		         if (!string.IsNullOrEmpty(_USER_NAME))
+		         {
+		             lstFilter.Add(new SolrQuery("USER_NAME:" + _USER_NAME));
+		         }
+		         if (!string.IsNullOrEmpty(_TABLE_NAME))
+		         {
+		             lstFilter.Add(new SolrQuery("TABLE_NAME:" + _TABLE_NAME));
+		         }
+		         if (!string.IsNullOrEmpty(_ACTION))
+		         {
+		             lstFilter.Add(new SolrQuery("ACTION:" + _ACTION));
+		         }
+		         if (_CDATE_START_DATE != null && _CDATE_END_DATE != null)
+		         {
+		             lstFilter.Add(new SolrQuery("CDATE:[" + Utility.GetJSONZFromUserDateTime(_CDATE_START_DATE) + " TO " + Utility.GetJSONZFromUserDateTime(_CDATE_END_DATE) + "]"));
+		         }
+		         List<SortOrder> lstOrder = new List<SortOrder>();
+		         lstOrder.Add(new SortOrder("ID", Order.DESC));
+                string[] fieldSelect = {"ID","USER_NAME","TABLE_NAME","ACTION","OLD_VALUE","NEW_VALUE","CDATE","LDATE","CUSER","LUSER"};
+		         List<LOG_DU_LIEU_DBInfo> results = QuerySolrBase<LOG_DU_LIEU_DBInfo>.QuerySolr_GetAllWithPadding(Config.SOLR_URL_CORE_BASE + "LOG_DU_LIEU_DB/", keyword, lstFilter, fieldSelect, lstOrder, pageIndex - 1, pageSize, ref totalRecord);
+		         List<LOG_DU_LIEU_DBInfo> listAddRange = new List<LOG_DU_LIEU_DBInfo>();
+		         if (listAddRange != null)
+		             listAddRange.AddRange(results);
+		         return listAddRange;
+		     }
+		     catch (Exception ex)
+		     {
+		         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+		         return null;
+		     }
+		 }
+		#endregion
+		
+        #region User defined
+
+        #endregion
+
+
+    }
+}

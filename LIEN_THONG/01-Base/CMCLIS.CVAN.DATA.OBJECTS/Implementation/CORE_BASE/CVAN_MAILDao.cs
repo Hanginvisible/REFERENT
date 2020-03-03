@@ -1,0 +1,155 @@
+﻿using System;
+using System.Collections.Generic;
+using SolrNet;
+using Lucene.Net.QueryParsers;
+using Lucene.Net.Analysis.Standard;
+using Oracle.DataAccess.Client;
+using CMCLIS.CVAN.ENTITY;
+using CMCLIS.CVAN.SETTING;
+using CMCLIS.CVAN.CORE;
+using CMCLIS.CVAN.CORE.Provider;
+using CMCLIS.CVAN.CORE.Solr;
+
+namespace CMCLIS.CVAN.DATA.OBJECTS
+{
+	//------------------------------------------------------------------------------------------------------------------------
+	//-- Created By: Ngô Văn Nghị
+	//-- Date: 02/12/2020 9:19:05 AM
+	//-- Todo: 
+	//------------------------------------------------------------------------------------------------------------------------ 
+    public class CVAN_MAILDao : OracleBaseImpl<CVAN_MAILInfo>
+    {
+        protected override void SetInfoDerivedClass()
+        {
+			TableName = "CVAN_MAIL";
+			PackageName = "PK_CVAN_MAIL";
+			ConnectionString = Config.DictConnectionString[Constant.CONNECTION_STRING_DATA_ORACLE];            
+            LuceneIndexData = Config.ORACLEGetInfoIndexLucene.ContainsKey(TableName) ? Config.ORACLEGetInfoIndexLucene[TableName] : Config.ORACLESetIndexLucene(TableName)[TableName];			
+        }
+
+        #region relationship support
+       
+        #endregion
+
+        #region Get List
+
+        public List<CVAN_MAILInfo> CVAN_MAIL_GetAllWithPadding(string _CVAN_FROM,string _CVAN_TO,string _CVAN_SUBJECT,string _CVAN_TYPE_CODE,int _CVAN_STATUS,int pageIndex, int pageSize,ref int totalRecord)
+        {
+            OracleParameter[] sqlParam = {
+                                        new OracleParameter("p_CVAN_FROM",_CVAN_FROM),
+                                        new OracleParameter("p_CVAN_TO",_CVAN_TO),
+                                        new OracleParameter("p_CVAN_SUBJECT",_CVAN_SUBJECT),
+                                        new OracleParameter("p_CVAN_TYPE_CODE",_CVAN_TYPE_CODE),
+                                        new OracleParameter("p_CVAN_STATUS",_CVAN_STATUS),
+                                    };
+            try
+            {
+                List<CVAN_MAILInfo> list = this.ExecuteQuery("usp_GET_ALL_WITH_PADDING", sqlParam, pageIndex, pageSize, ref totalRecord);
+                return list;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+            }
+
+        }
+
+        #endregion
+		
+		#region Using Lucene
+		
+		 public List<CVAN_MAILInfo> CVAN_MAIL_GetListByLucene(string keyword, int selectTop)
+        {
+            try
+            {
+                string[] fieldSelect = {"ID","CVAN_FROM","CVAN_TO","CVAN_SUBJECT","CVAN_CONTENT","CVAN_TYPE_CODE","CVAN_TYPE_NAME","CVAN_DESCRIPTION","CVAN_STATUS","CDATE","LDATE","CUSER","LUSER"};
+                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, fieldSelect, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
+                parser.SetAllowLeadingWildcard(true);
+                parser.SetDefaultOperator(QueryParser.Operator.OR);
+                keyword = keyword + "*";
+                var q = parser.Parse(keyword);
+                return this.Search(q, null, null, selectTop, false);
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+           }
+        }
+		#endregion
+		
+		#region Using Solr
+		
+		 public CVAN_MAILInfo CVAN_MAIL_QuerySolr_GetInfo()
+		 {
+		     try
+		     {
+		         List<ISolrQuery> lstFilter = new List<ISolrQuery>();
+		         List<SortOrder> lstOrder = new List<SortOrder>();
+		         lstOrder.Add(new SortOrder("ID", Order.DESC));
+                string[] fieldSelect = {"ID","CVAN_FROM","CVAN_TO","CVAN_SUBJECT","CVAN_CONTENT","CVAN_TYPE_CODE","CVAN_TYPE_NAME","CVAN_DESCRIPTION","CVAN_STATUS","CDATE","LDATE","CUSER","LUSER"};
+		         int totalRecord = 0;
+		         List<CVAN_MAILInfo> results = QuerySolrBase<CVAN_MAILInfo>.QuerySolr_GetAllWithPadding(Config.SOLR_URL_CORE_BASE + "CVAN_MAIL/", string.Empty, lstFilter, fieldSelect, lstOrder, 0, int.Parse(Config.SOLR_PAGE_SIZE), ref totalRecord);
+		         if (results != null && results.Count > 0)
+		         {
+		             return results[0];
+		         }
+		         return null;
+		     }
+		     catch (Exception ex)
+		     {
+		         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+		         return null;
+		     }
+		 }
+
+		 public List<CVAN_MAILInfo> CVAN_MAIL_QuerySolr_GetAllWithPadding(string keyword, string _CVAN_FROM,string _CVAN_TO,string _CVAN_SUBJECT,string _CVAN_TYPE_CODE,int _CVAN_STATUS, int pageIndex, int pageSize,ref int totalRecord)
+		 {
+		     try
+		     {
+		         List<ISolrQuery> lstFilter = new List<ISolrQuery>();
+		         if (!string.IsNullOrEmpty(_CVAN_FROM))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_FROM:" + _CVAN_FROM));
+		         }
+		         if (!string.IsNullOrEmpty(_CVAN_TO))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_TO:" + _CVAN_TO));
+		         }
+		         if (!string.IsNullOrEmpty(_CVAN_SUBJECT))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_SUBJECT:" + _CVAN_SUBJECT));
+		         }
+		         if (!string.IsNullOrEmpty(_CVAN_TYPE_CODE))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_TYPE_CODE:" + _CVAN_TYPE_CODE));
+		         }
+		         if (_CVAN_STATUS != -1)
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_STATUS:" + _CVAN_STATUS));
+		         }
+		         List<SortOrder> lstOrder = new List<SortOrder>();
+		         lstOrder.Add(new SortOrder("ID", Order.DESC));
+                string[] fieldSelect = {"ID","CVAN_FROM","CVAN_TO","CVAN_SUBJECT","CVAN_CONTENT","CVAN_TYPE_CODE","CVAN_TYPE_NAME","CVAN_DESCRIPTION","CVAN_STATUS","CDATE","LDATE","CUSER","LUSER"};
+		         List<CVAN_MAILInfo> results = QuerySolrBase<CVAN_MAILInfo>.QuerySolr_GetAllWithPadding(Config.SOLR_URL_CORE_BASE + "CVAN_MAIL/", keyword, lstFilter, fieldSelect, lstOrder, pageIndex - 1, pageSize, ref totalRecord);
+		         List<CVAN_MAILInfo> listAddRange = new List<CVAN_MAILInfo>();
+		         if (listAddRange != null)
+		             listAddRange.AddRange(results);
+		         return listAddRange;
+		     }
+		     catch (Exception ex)
+		     {
+		         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+		         return null;
+		     }
+		 }
+		#endregion
+		
+        #region User defined
+
+        #endregion
+
+
+    }
+}

@@ -1,0 +1,54 @@
+﻿using CMCLIS.GATEWAY.ENTITY;
+using System.ComponentModel;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+
+namespace CMCLIS.GATEWAY.SERVICES
+{
+    [ServiceContract]
+    public interface IAPI_EMAIL
+    {
+        #region Create Functions "CVAN_MAIL"
+        [OperationContract]
+        [Description("Thêm mới thông tin bảng CVAN_MAIL")]
+        [WebInvoke(UriTemplate = "CVAN_MAIL", Method = "POST", ResponseFormat = WebMessageFormat.Json)]
+        Response CVAN_MAIL_Add(CVAN_MAILInfo info);
+
+        [OperationContract]
+        [Description("Cập nhật thông tin thông tin bảng CVAN_MAIL")]
+        [WebInvoke(UriTemplate = "CVAN_MAIL", Method = "PUT", ResponseFormat = WebMessageFormat.Json)]
+        Response CVAN_MAIL_Update(CVAN_MAILInfo info);
+
+        [OperationContract]
+        [Description("Xóa thông tin bảng CVAN_MAIL theo ID")]
+        [WebInvoke(UriTemplate = "CVAN_MAIL/{ID}", Method = "DELETE", ResponseFormat = WebMessageFormat.Json)]
+        Response CVAN_MAIL_Delete(string ID);
+
+        [OperationContract]
+        [Description("Lấy thông tin bản ghi của bảng CVAN_MAIL theo ID")]
+        [WebInvoke(UriTemplate = "CVAN_MAIL/{ID}", Method = "GET", ResponseFormat = WebMessageFormat.Json)]
+        ResponseInfo<CVAN_MAILInfo> CVAN_MAIL_GetInfo(string ID);
+
+        [OperationContract]
+        [Description("Lấy tất cả thông tin bảng CVAN_MAIL")]
+        [WebGet(UriTemplate = "CVAN_MAIL", ResponseFormat = WebMessageFormat.Json)]
+        ResponseList<CVAN_MAILInfo> CVAN_MAIL_GetList();
+
+        [OperationContract]
+        [Description("Lấy tất cả thông tin của 1 trang trong bảng CVAN_MAIL theo điều kiện {CVAN_FROM}/{CVAN_TO}/{CVAN_SUBJECT}/{CVAN_TYPE_CODE}/{CVAN_STATUS}/{IS_DELETE}")]
+        [WebGet(UriTemplate = "CVAN_MAIL/{CVAN_FROM}/{CVAN_TO}/{CVAN_SUBJECT}/{CVAN_TYPE_CODE}/{CVAN_STATUS}/{IS_DELETE}/{pageIndex}/{pageSize}", ResponseFormat = WebMessageFormat.Json)]
+        ResponsePage<CVAN_MAILInfo> CVAN_MAIL_GetAllWithPadding(string CVAN_FROM, string CVAN_TO, string CVAN_SUBJECT, string CVAN_TYPE_CODE, string CVAN_STATUS, string IS_DELETE, string pageIndex, string pageSize);
+
+        [OperationContract]
+        [Description("Xuất mẫu nhập bảng CVAN_MAIL theo điều kiện {extension}")]
+        [WebGet(UriTemplate = "CVAN_MAIL_EXPORT_TEMPLATE/{extension}", ResponseFormat = WebMessageFormat.Json)]
+        Response CVAN_MAIL_EXPORT_TEMPLATE(string extension);
+
+        [OperationContract]
+        [Description("Xuất dữ liệu bảng CVAN_MAIL theo điều kiện {CVAN_FROM}/{CVAN_TO}/{CVAN_SUBJECT}/{CVAN_TYPE_CODE}/{CVAN_STATUS}/{IS_DELETE}")]
+        [WebGet(UriTemplate = "CVAN_MAIL_EXPORT_DATA/{CVAN_FROM}/{CVAN_TO}/{CVAN_SUBJECT}/{CVAN_TYPE_CODE}/{CVAN_STATUS}/{IS_DELETE}/{extension}", ResponseFormat = WebMessageFormat.Json)]
+        Response CVAN_MAIL_EXPORT_DATA(string CVAN_FROM, string CVAN_TO, string CVAN_SUBJECT, string CVAN_TYPE_CODE, string CVAN_STATUS, string IS_DELETE, string extension);
+
+        #endregion
+    }
+}

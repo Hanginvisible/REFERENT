@@ -1,0 +1,17 @@
+﻿Installing assembly 'E:\CMCLIS\LIEN_THONG\CMCLIS.CVAN.LOG\bin\Debug\CMCLIS.CVAN.LOG.exe'.
+Affected parameters are:
+   assemblypath = E:\CMCLIS\LIEN_THONG\CMCLIS.CVAN.LOG\bin\Debug\CMCLIS.CVAN.LOG.exe
+   logfile = E:\CMCLIS\LIEN_THONG\CMCLIS.CVAN.LOG\bin\Debug\CMCLIS.CVAN.LOG.InstallLog
+Installing service CVAN_LOG...
+Creating EventLog source CVAN_LOG in log Application...
+See the contents of the log file for the E:\CMCLIS\LIEN_THONG\CMCLIS.CVAN.LOG\bin\Debug\CMCLIS.CVAN.LOG.exe assembly's progress.
+The file is located at E:\CMCLIS\LIEN_THONG\CMCLIS.CVAN.LOG\bin\Debug\CMCLIS.CVAN.LOG.InstallLog.
+Rolling back assembly 'E:\CMCLIS\LIEN_THONG\CMCLIS.CVAN.LOG\bin\Debug\CMCLIS.CVAN.LOG.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = E:\CMCLIS\LIEN_THONG\CMCLIS.CVAN.LOG\bin\Debug\CMCLIS.CVAN.LOG.InstallLog
+   assemblypath = E:\CMCLIS\LIEN_THONG\CMCLIS.CVAN.LOG\bin\Debug\CMCLIS.CVAN.LOG.exe
+Restoring event log to previous state for source CVAN_LOG.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security, State.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7967DDF0-949C-421A-8F56-09CFA49B3591}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMCLIS.GATEWAY.DATA.OBJECTS</RootNamespace>
+    <AssemblyName>CMCLIS.GATEWAY.DATA.OBJECTS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\..\packages\LIB\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\CTS.GATEWAY.LIB\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86" />
+    <Reference Include="SolrNet">
+      <HintPath>..\..\packages\LIB\SolrNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataObjectFactory.cs" />
+    <Compile Include="Implementation\CORE_BASE\CVAN_DM_LT_THUEDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\CVAN_DM_MSG_TYPEDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\CVAN_DM_STATUSDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\CVAN_EXCHANGEDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\CVAN_MAILDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\CVAN_MSGIDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\CVAN_MSGODao.cs" />
+    <Compile Include="Implementation\CORE_BASE\FILE_SERVER_DATADao.cs" />
+    <Compile Include="Implementation\CORE_BASE\LOG_CHUC_NANGDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\LOG_DATADao.cs" />
+    <Compile Include="Implementation\CORE_BASE\LOG_DU_LIEU_DBDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\LOG_TRUY_CAPDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\LOG_XL_HANG_LOATDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\LOG_XL_QUY_TRINHDao.cs" />
+    <Compile Include="Implementation\CORE_BASE\SHARE_DD_MO_TDDao.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMCLIS.GATEWAY.CORE\CMCLIS.GATEWAY.CORE.csproj">
+      <Project>{cc094dd4-b355-4546-bb48-3629b8f946fb}</Project>
+      <Name>CMCLIS.GATEWAY.CORE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMCLIS.GATEWAY.ENTITY\CMCLIS.GATEWAY.ENTITY.csproj">
+      <Project>{a46618e5-f4f9-403c-933e-b9a52029d235}</Project>
+      <Name>CMCLIS.GATEWAY.ENTITY</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMCLIS.GATEWAY.SETTING\CMCLIS.GATEWAY.SETTING.csproj">
+      <Project>{51576409-0de4-4335-9b92-770c2aa81c42}</Project>
+      <Name>CMCLIS.GATEWAY.SETTING</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Implementation\AUTHENTICATION\" />
+    <Folder Include="Implementation\SYSTEMS\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

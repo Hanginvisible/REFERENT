@@ -1,0 +1,47 @@
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.WServiceScheduler.exe.config
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.WServiceScheduler.exe
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.WServiceScheduler.pdb
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Core.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Setting.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\Lucene.Net.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\Highlighter.Net.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\SolrNet.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\SimilarityNet.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\RabbitMQ.Client.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Entity.dll
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Core.pdb
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Setting.pdb
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\RabbitMQ.Client.xml
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Entity.pdb
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.csprojResolveAssemblyReference.cache
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.ProjectInstaller.resources
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.ServiceScheduler.resources
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.csproj.GenerateResource.Cache
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.exe
+E:\Project\CMC SOFT\PROJECTS\HTKK_NCKT\HTKK-TVAN\GATEWAY\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.pdb
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.WServiceScheduler.exe.config
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.WServiceScheduler.exe
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.WServiceScheduler.pdb
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Core.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Setting.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\Lucene.Net.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\Highlighter.Net.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\SolrNet.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\SimilarityNet.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\Aspose.Cells.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\Aspose.Words.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\itextsharp.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\RabbitMQ.Client.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Entity.dll
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Core.pdb
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Setting.pdb
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\RabbitMQ.Client.xml
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\bin\Debug\CVAN.GW.Entity.pdb
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.csprojResolveAssemblyReference.cache
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.ProjectInstaller.resources
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.ServiceScheduler.resources
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.csproj.GenerateResource.Cache
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.exe
+D:\BHXH\CVAN\CVAN-GATEWAY\04-WinServices\CVAN.GW.WServiceScheduler\obj\Debug\CVAN.GW.WServiceScheduler.pdb

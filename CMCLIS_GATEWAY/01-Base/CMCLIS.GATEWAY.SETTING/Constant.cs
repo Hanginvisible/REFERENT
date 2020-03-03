@@ -1,0 +1,219 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace CMCLIS.GATEWAY.SETTING
+{
+    public class Constant
+    {
+        public static Dictionary<string, string> DICT_QUAN_HE_GIA_DINH = new Dictionary<string, string>()
+        {
+            {"01", "Bố"},
+            {"02", "Mẹ"},
+            {"03", "Anh/em"},
+            {"04", "Chị/em"},
+            {"05", "Người bảo hộ"}
+        };
+        //Danh sách mối quan hệ 01 thính lực, 02 - thị lực, 03 - tay, 04 - chân, 05 - cong vẹo cột sống, 06 - khe hở môi, vòm miệng, 07 - khác ...
+        public static Dictionary<string, string> DICT_KHUYET_TAT = new Dictionary<string, string>()
+        {
+            {"01", "Thính lực"},
+            {"02", "Thị lực"},
+            {"03", "Tay"},
+            {"04", "Chân"},
+            {"05", "Cong vẹo cột sống"},
+            {"06", "Khe hở môi, vòm miệng"},
+            {"07", "khuyết tật khác"}
+        };
+        public const string CLIS_MAIL_INFO = "CLIS_MAIL_INFO";
+        public const string FILE_SERVER_INFO_UPLOAD_API = "FILE_SERVER_INFO_UPLOAD_API"; 
+
+        //Setting eInvoice
+        public const string HOA_DON_GOC = "1";
+        public const string HOA_DON_THAY_THE = "2";
+        public const string HOA_DON_BI_THAY_THE = "3";
+        public const string HOA_DON_DIEU_CHINH = "4";
+        public const string HOA_DON_BI_DIEU_CHINH = "5";
+        public const string HOA_DON_CHUYEN_DOI = "6";
+        public const string HOA_DON_BI_CHUYEN_DOI = "7";
+        public const string HOA_DON_HUY = "8";
+
+        public const string NGUON_NHAP_LIEU_HDDT = "E-INVOICE";
+        public const string NGUON_NHAP_LIEU_EXCEL = "EXCEL";
+        public const string NGUON_NHAP_LIEU_DONG_BO = "DONG_BO";
+        public const string NGUON_NHAP_LIEU_MISA = "MISA";
+        public const string NGUON_NHAP_LIEU_OTHER = "OTHER";
+
+        public const string SESSION_USER_LOGIN = "SESSION_USER_LOGIN";
+        public const string SESSION_SERVICE_API = "SESSION_SERVICE_API";
+        // Connection String
+        public const string CONNECTION_STRING_PORTAL_MSSQL = "CONNECTION_STRING_PORTAL_MSSQL";
+        public const string CONNECTION_STRING_DATA_MSSQL = "CONNECTION_STRING_DATA_MSSQL";
+        public const string CONNECTION_STRING_DATA_ORACLE = "CONNECTION_STRING_DATA_ORACLE";
+        public const string ORACLE_OWNER = "ORACLE_OWNER";
+        // Services              
+
+        public const string API_AUTHENTICATION = "API_AUTHENTICATION";
+        public const string API_CORE_BASE = "API_CORE_BASE";
+        public const string API_SYSTEMS = "API_SYSTEMS";
+        public const string API_BAO_CAO = "API_BAO_CAO";
+        public const string API_TIM_KIEM = "API_TIM_KIEM";
+        public const string API_LIEN_THONG = "API_LIEN_THONG";
+        public const string API_LOG = "API_LOG";
+        public const string API_FILE_SERVER = "API_FILE_SERVER";
+        public const string API_CHIA_SE = "API_CHIA_SE";
+        public const string API_EMAIL = "API_EMAIL";
+
+
+        //Lucene
+        public const string IS_USE_LUCENE = "IS_USE_LUCENE";
+        public const string IS_UPDATE_LUCENE = "IS_UPDATE_LUCENE";
+        public const string PATH_INDEX_LUCENE_MSSQL = "PATH_INDEX_LUCENE_MSSQL";
+        public const string PATH_INDEX_LUCENE_ORACLE = "PATH_INDEX_LUCENE_ORACLE";
+        public const string LUCENE_PAGE_SIZE = "LUCENE_PAGE_SIZE";
+        public const string MAX_FIELD_LENGTH = "MAX_FIELD_LENGTH";
+        public const string FILE_NAME_LOCK_LUCENE = "FILE_NAME_LOCK_LUCENE";//"write.lock";
+        //PREFIX
+        public const string PREFIX = "PREFIX";
+        //PREFIX
+        public const string API_KEY = "API_KEY";
+        //CMCSOFT_MAIL
+        public const string CMCSOFT_MAIL = "CMCSOFT_MAIL";
+        //MICRO SERVICE
+        public const string MICRO_SERVICE_IP = "MICRO_SERVICE_IP";
+        public const string MICRO_SERVICE_PORT = "MICRO_SERVICE_PORT";
+        public const string MICRO_SERVICE_NAME = "MICRO_SERVICE_NAME";
+        public const string MICRO_SERVICE_DISPLAY_NAME = "MICRO_SERVICE_DISPLAY_NAME";
+        public const string MICRO_SERVICE_MAXLENGTH_MESSAGESIZE = "MICRO_SERVICE_MAXLENGTH_MESSAGESIZE";
+        //USING_ENVIROMENT
+        public const string USING_ENVIROMENT = "USING_ENVIROMENT";
+        //Solr
+        public const string SOLR_URL_CORE_BASE = "SOLR_URL_CORE_BASE";
+        public const string SOLR_URL_REPORT = "SOLR_URL_REPORT";
+        public const string SOLR_URL_SEARCH = "SOLR_URL_SEARCH";
+        //Thong tin CA
+        public const string CA_FILE_NAME = "CA_FILE_NAME";
+        public const string CA_PASSWORD = "CA_PASSWORD";
+        public const string CA_TOKENT_SERIAL = "CA_TOKENT_SERIAL";
+        //SOLR_PAGE_SIZE
+        public const string SOLR_PAGE_SIZE = "SOLR_PAGE_SIZE";
+        //LogPath
+        public const string LOG_PATH = "LOG_PATH";
+        public const string PATH_DATA_PORTAL = "PATH_DATA_PORTAL";
+        public const string PATH_DATA_SERVICE = "PATH_DATA_SERVICE";
+        public const string PATH_DATA_SAVE_FILE = "PATH_DATA_SAVE_FILE";
+
+        public const string SERVICE_NAME = "SERVICE_NAME";
+        public const string KEY_AUTHORIZATION = "KEY_AUTHORIZATION";
+        public const string LIST_HOST_REFERER = "LIST_HOST_REFERER";
+        //Product info
+        public const string VERSION = "VERSION";
+        public const string SOFTWARE_NAME = "SOFTWARE_NAME";
+        public const string ASSEMBLY_NAME = "ASSEMBLY_NAME";
+        public const string NAMESPACE_NAME = "NAMESPACE_NAME";
+        public const string SOFTWARE_CODE = "SOFTWARE_CODE";
+        public const string LICENSE_KEY = "LICENSE_KEY";
+        public const string LICENSE_SERVICE = "LICENSE_SERVICE";
+        public const string PAGE_SIZE = "PAGE_SIZE";
+        //CONFIG-INFOMATION
+        public const string SEARCH_INVOICE_CODE = "SEARCH_INVOICE_CODE";
+        public const string SUPPLIER_COMPANY_NAME = "SUPPLIER_COMPANY_NAME";
+        public const string SUPPLIER_PHONE_SUPPORT = "SUPPLIER_PHONE_SUPPORT";
+        public const string SUPPLIER_WEBSITE_SUPPORT = "SUPPLIER_WEBSITE_SUPPORT";
+        public const string SUPPLIER_WEBSITE_SEARCH = "SUPPLIER_WEBSITE_SEARCH";
+        public const string ROW_VIEW_INVOICE = "ROW_VIEW_INVOICE";
+
+        public const string SIGN_TYPE_FILE = "SIGN_TYPE_FILE";
+        //File upload
+        public const string FILE_UPLOAD_EXTENSIVE = "*.xls|*.xlsx|*.xlt";
+        //ENCRYPT_KEY
+        public const string ENCRYPT_KEY = "120619841721484752016";
+        //RabbitMQ
+        //public const string MQ_NAME_HTKK = "MQ_NAME_HTKK";
+        public const string MQ_NAME_LIST = "MQ_NAME_LIST";
+        public const string MQ_NAME = "MQ_NAME";
+        public const string MQ_PORT = "MQ_PORT";
+        public const string MQ_USER = "MQ_USER";
+        public const string MQ_PASSWORD = "MQ_PASSWORD";
+        public const string MQ_HOST = "MQ_HOST";
+
+        //Network Share;
+        public const string NETWORK_SAVE_USING = "NETWORK_SAVE_USING";
+        public const string NETWORK_SHARE_IP = "NETWORK_SHARE_IP";
+        public const string NETWORK_SHARE_ACCOUNT = "NETWORK_SHARE_ACCOUNT";
+        public const string NETWORK_SHARE_PASSWORD = "NETWORK_SHARE_PASSWORD";
+        public const string NETWORK_SHARE_DIRECTORY = "NETWORK_SHARE_DIRECTORY";
+        // FTP CONFIG
+        public const string FTP_USING = "FTP_USING";
+        public const string FTP_SERVER_URI = "FTP_SERVER_URI";
+        public const string FTP_USER = "FTP_USER";
+        public const string FTP_PASSWORD = "FTP_PASSWORD";
+        public const string FTP_DOWNLOAD_FILE = "FTP_DOWNLOAD_FILE";
+        //Return code
+        public const string RETURN_CODE_SUCCESS = "200";
+        public const string RETURN_CODE_ERROR = "203";
+        public const string RETURN_CODE_WARNING = "403";
+        public const string RETURN_CODE_NOT_FOUND = "404";
+        //Message throw exception        
+        public const string MESSAGE_ERROR = "Thực hiện không thành công ! ";
+        public const string MESSAGE_NOT_FOUND = "Không tìm thấy nội dung ! ";
+        public const string MESSAGE_NOT_MESSAGE_TYPE = "Không tìm thấy loại message ! ";
+        public const string MESSAGE_ERROR_ADD = "Thêm mới dữ liệu không thành công ! ";
+        public const string MESSAGE_ERROR_DELETE = "Xóa dữ liệu không thành công ! ";
+        public const string MESSAGE_ERROR_UPDATE = "Cập nhật dữ liệu không thành công ! ";
+        public const string MESSAGE_ERROR_EXIST = "Nội dung đã tồn tại trong hệ thống ! ";
+        public const string MESSAGE_AUT_SUCCESS = "Xác thực không thành công ! ";
+        public const string MESSAGE_SUCCESS = "Thực hiện thành công ! ";
+        public const string MESSAGE_SUCCESS_ADD = "Thêm mới dữ liệu thành công ! ";
+        public const string MESSAGE_SUCCESS_UPDATE = "Cập nhật dữ liệu thành công ! ";
+        public const string MESSAGE_SUCCESS_DELETE = "Xóa dữ liệu thành công ! ";
+        public const string MESSAGE_NOT_VALIDATE = "Nội dung message không đúng ! ";
+
+        public const string MESSAGE_AUT_ERROR_ACTIVE = "Dịch vụ chưa được kích hoạt!";
+        public const string MESSAGE_AUT_ERROR_DUPLICATE = "Dịch vụ đã được đăng ký !";
+        public const string MESSAGE_AUT_ERROR_EXPIRED = "Dịch vụ hết hạn sử dụng !";
+        public const string MESSAGE_AUT_ERROR_TOKENT = "Tokent không đúng!";
+        public const string MESSAGE_AUT_ERROR = "Tài khoản không hợp lệ (Không tồn tại,Chưa kích hoạt,hết hạn sử dụng...) !";
+
+        //Invoice
+        public const string MESSAGE_SUCCESS_SAVE_HOA_DON = "Lưu hóa đơn thành công ! ";
+        public const string MESSAGE_ERROR_HOA_DON_THAY_THE = "Hóa đơn chưa ký không được thay thế! ";
+        public const string MESSAGE_ERROR_HOA_DON_DIEU_CHINH = "Hóa đơn chưa ký không được điều chỉnh ! ";
+        public const string MESSAGE_ERROR_HOA_DON_CHUYEN_DOI = "Hóa đơn chưa ký không được chuyển đổi! ";
+        public const string MESSAGE_ERROR_HOA_DON_HUY = "Hóa đơn chưa ký không được hủy ";
+        public const string MESSAGE_ERROR_DIEU_CHINH_3 = "Hóa đơn bị thay thế bởi hóa đơn khác nên không được điều chỉnh! ";
+        public const string MESSAGE_ERROR_DIEU_CHINH_5 = "Hóa đơn bị điều chỉnh bởi hóa đơn khác nên không được điều chỉnh! ";
+        public const string MESSAGE_ERROR_DIEU_CHINH_8 = "Hóa đơn đã hủy nên không được điều chỉnh! ";
+        public const string MESSAGE_ERROR_THAY_THE_3 = "Hóa đơn bị thay thế bởi hóa đơn khác nên không được thay thế! ";
+        public const string MESSAGE_ERROR_THAY_THE_5 = "Hóa đơn bị điều chỉnh bởi hóa đơn khác nên không được thay thế! ";
+        public const string MESSAGE_ERROR_THAY_THE_8 = "Hóa đơn đã hủy nên không được thay thế! ";
+        public const string MESSAGE_ERROR_HOA_DON_SEARCH = "Không tìm thấy hóa đơn trong hệ thống! ";
+
+        public const string MESSAGE_ERROR_HOA_DON_DA_KY_UPDATE = "Hóa đơn đã ký không được chỉnh sửa! ";
+        public const string MESSAGE_ERROR_HOA_DON_DA_HUY_UPDATE = "Hóa đơn đã hủy không được chỉnh sửa! ";
+
+        public const string MESSAGE_SUCCESS_EXPORT_INVOICE = "Xuất hóa đơn thành công ! ";
+        public const string MESSAGE_ERROR_EXPORT_INVOICE = "Có lỗi xảy ra trong quá trình xuất hóa đơn ! ";
+
+        public const string MESSSAGE_NOT_PERMISSION = "Không có quyền truy cập.";
+
+        public const string MESSAGE_SERVER_QUA_TAI = "Server đang quá tải, bạn vui lòng thực hiện lại thao tác sau ít phút.";
+
+        public const string MESSAGE_DU_LIEU_CHUA_HOP_LE = "Dữ liệu chưa hợp lệ, bạn vui lòng kiểm tra lại.";
+
+        public static string CMCLIS_LOG_INFO = "CMCLIS_LOG_INFO";
+
+        // Enum for API_LOG
+        public enum TYPE_OF_LOG
+        {
+            LOG_CHUC_NANG = 1,
+            LOG_DATA = 2 ,
+            LOG_DU_LIEU_DB =3,
+            LOG_TRUY_CAP = 4,
+            LOG_XU_LY_HANG_LOAT = 5,
+            LOG_XU_LY_QUY_TRINH = 6,
+
+        }
+    }
+}

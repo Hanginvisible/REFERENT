@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A46618E5-F4F9-403C-933E-B9A52029D235}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMCLIS.GATEWAY.ENTITY</RootNamespace>
+    <AssemblyName>CMCLIS.GATEWAY.ENTITY</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Highlighter.Net">
+      <HintPath>..\..\packages\LIB\Highlighter.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\..\packages\LIB\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="SimilarityNet">
+      <HintPath>..\..\packages\LIB\SimilarityNet.dll</HintPath>
+    </Reference>
+    <Reference Include="SolrNet">
+      <HintPath>..\..\packages\LIB\SolrNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CORE_BASE\CVAN_DM_LT_THUEInfo.cs" />
+    <Compile Include="CORE_BASE\CVAN_DM_MSG_TYPEInfo.cs" />
+    <Compile Include="CORE_BASE\CVAN_DM_STATUSInfo.cs" />
+    <Compile Include="CORE_BASE\CVAN_EXCHANGEInfo.cs" />
+    <Compile Include="CORE_BASE\CVAN_MAILInfo.cs" />
+    <Compile Include="CORE_BASE\CVAN_MSGIInfo.cs" />
+    <Compile Include="CORE_BASE\CVAN_MSGOInfo.cs" />
+    <Compile Include="CORE_BASE\FILE_SERVER_DATAInfo.cs" />
+    <Compile Include="CORE_BASE\LOG_CHUC_NANGInfo.cs" />
+    <Compile Include="CORE_BASE\LOG_DATAInfo.cs" />
+    <Compile Include="CORE_BASE\LOG_DU_LIEU_DBInfo.cs" />
+    <Compile Include="CORE_BASE\LOG_TRUY_CAPInfo.cs" />
+    <Compile Include="CORE_BASE\LOG_XL_HANG_LOATInfo.cs" />
+    <Compile Include="CORE_BASE\LOG_XL_QUY_TRINHInfo.cs" />
+    <Compile Include="CORE_BASE\SHARE_DD_MO_TDInfo.cs" />
+    <Compile Include="EMAIL\CVAN_MAIL.cs" />
+    <Compile Include="EMAIL\CVAN_MAIL_SEND.cs" />
+    <Compile Include="FILE_SERVER\FILE_SERVER_DATAObject.cs" />
+    <Compile Include="FILE_SERVER\FILE_SERVER_RESPONSE.cs" />
+    <Compile Include="LIEN_THONG\SERVICE_REQUEST_INFO.cs" />
+    <Compile Include="SYSTEMS\Base\Request.cs" />
+    <Compile Include="SYSTEMS\Base\Response.cs" />
+    <Compile Include="SYSTEMS\Base\ResponseInfo.cs" />
+    <Compile Include="SYSTEMS\Base\ResponseList.cs" />
+    <Compile Include="SYSTEMS\Base\ResponsePage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMCLIS.GATEWAY.CORE\CMCLIS.GATEWAY.CORE.csproj">
+      <Project>{cc094dd4-b355-4546-bb48-3629b8f946fb}</Project>
+      <Name>CMCLIS.GATEWAY.CORE</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AUTHENTICATION\" />
+    <Folder Include="LOG\" />
+    <Folder Include="TIM_KIEM\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

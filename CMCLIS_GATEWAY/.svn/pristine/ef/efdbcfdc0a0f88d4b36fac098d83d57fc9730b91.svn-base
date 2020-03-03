@@ -1,0 +1,41 @@
+﻿<?xml version="1.0"?>
+<appSettings>
+  <!--<add key="CONNECTION_STRING_PORTAL_MSSQL" value="SERVER=10.20.0.80;UID=sa;Password=Abcde12345-;database=SYS.INTERNAL.PORTAL" />-->
+  <add key="CONNECTION_STRING_DATA_ORACLE" value="Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP) (HOST=202.134.19.105)(PORT=1521))) (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCL))); User Id=CMCLIS_GATEWAY;Password=CMCLIS_GATEWAY;" />
+  <!--Config using database-->
+  <add key="ORACLE_OWNER" value="CMCLIS_GATEWAY"/>
+  <add key="LUCENE_PAGE_SIZE" value="10"/>
+  <add key="IS_USE_LUCENE" value="false"/>
+  <add key="IS_UPDATE_LUCENE" value="false"/>  
+  <add key="MAX_FIELD_LENGTH" value="10"/>
+  <add key="FILE_NAME_LOCK_LUCENE" value="write.lock"/>
+  <!--Config application-->
+  <add key="VERSION" value="VERSION : 1.0"/>
+  <add key="SOFTWARE_CODE" value="CMCLIS_GATEWAY" />
+  <add key="SOFTWARE_NAME" value="CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH"/>
+  <add key="ASSEMBLY_NAME" value=""/>
+  <add key="NAMESPACE_NAME" value=""/>
+  <!--Config SOLR-->
+  <add key="SOLR_URL_CORE_BASE" value="http://202.134.19.107:9090/SOLR_QLDD/"/>
+  <add key="SOLR_PAGE_SIZE" value="20"/>
+  <!--Config OTHER-->
+  <add key="PAGE_SIZE" value="20"/>
+  <add key="USING_ENVIROMENT" value="web"/>
+  <add key="KEY_AUTHORIZATION" value="0d17f84a-7023-4ce4-bfa5-12b3bd0798c6"/>  
+  <!--MQ Setting-->
+  <add key="MQ_NAME" value="CMCLIS_HO_SO_THUE" />
+  <add key="MQ_USER" value="mqadmin" />
+  <add key="MQ_PASSWORD" value="mqadmin" />
+  <add key="MQ_PORT" value="5672" />
+  <add key="MQ_HOST" value="202.134.19.107" />  
+  <!--CONFIG-REDIS-->
+  <add key="REDIS_HOST" value="10.20.0.80" />
+  <add key="REDIS_PORT" value="6379" />
+  <add key="REDIS_PASSWORD" value="Redis@2019" />
+  
+  <!--FTP CONFIG-->
+  <add key="FTP_USING" value=""/>
+  <add key="FTP_SERVER_URI" value="ftp://localhost/"/>
+  <add key="FTP_USER" value=""/>
+  <add key="FTP_PASSWORD" value=""/>
+</appSettings>

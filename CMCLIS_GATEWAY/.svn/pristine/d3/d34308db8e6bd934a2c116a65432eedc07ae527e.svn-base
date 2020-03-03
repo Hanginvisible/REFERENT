@@ -1,0 +1,192 @@
+﻿using System;
+using System.Collections.Generic;
+using SolrNet;
+using Lucene.Net.QueryParsers;
+using Lucene.Net.Analysis.Standard;
+using Oracle.DataAccess.Client;
+using CMCLIS.GATEWAY.ENTITY;
+using CMCLIS.GATEWAY.SETTING;
+using CMCLIS.GATEWAY.CORE;
+using CMCLIS.GATEWAY.CORE.Provider;
+using CMCLIS.GATEWAY.CORE.Solr;
+
+namespace CMCLIS.GATEWAY.DATA.OBJECTS
+{
+	//------------------------------------------------------------------------------------------------------------------------
+	//-- Created By: Ngô Văn Nghị
+	//-- Date: 02/21/2020 9:29:06 AM
+	//-- Todo: 
+	//------------------------------------------------------------------------------------------------------------------------ 
+    public class SHARE_DD_MO_TDDao : OracleBaseImpl<SHARE_DD_MO_TDInfo>
+    {
+        protected override void SetInfoDerivedClass()
+        {
+			TableName = "SHARE_DD_MO_TD";
+			PackageName = "PK_SHARE_DD_MO_TD";
+			ConnectionString = Config.DictConnectionString[Constant.CONNECTION_STRING_DATA_ORACLE];            
+            LuceneIndexData = Config.ORACLEGetInfoIndexLucene.ContainsKey(TableName) ? Config.ORACLEGetInfoIndexLucene[TableName] : Config.ORACLESetIndexLucene(TableName)[TableName];			
+        }
+
+        #region relationship support
+       
+        #endregion
+
+        #region Get List
+
+        public List<SHARE_DD_MO_TDInfo> SHARE_DD_MO_TD_GetAllWithPadding(string _MA_DVI,string _LOAIDAT,string _SOTOGOC,string _SOTOCU,string _SOTHUACU,string _MAKVUC,string _MAHUYEN,string _MAXA,decimal _SOTO,decimal _SOTHUA,int _IS_DELETE,int pageIndex, int pageSize,ref int totalRecord)
+        {
+            OracleParameter[] sqlParam = {
+                                        new OracleParameter("p_MA_DVI",_MA_DVI),
+                                        new OracleParameter("p_LOAIDAT",_LOAIDAT),
+                                        new OracleParameter("p_SOTOGOC",_SOTOGOC),
+                                        new OracleParameter("p_SOTOCU",_SOTOCU),
+                                        new OracleParameter("p_SOTHUACU",_SOTHUACU),
+                                        new OracleParameter("p_MAKVUC",_MAKVUC),
+                                        new OracleParameter("p_MAHUYEN",_MAHUYEN),
+                                        new OracleParameter("p_MAXA",_MAXA),
+                                        new OracleParameter("p_SOTO",_SOTO),
+                                        new OracleParameter("p_SOTHUA",_SOTHUA),
+                                        new OracleParameter("p_IS_DELETE",_IS_DELETE),
+                                    };
+            try
+            {
+                List<SHARE_DD_MO_TDInfo> list = this.ExecuteQuery("usp_GET_ALL_WITH_PADDING", sqlParam, pageIndex, pageSize, ref totalRecord);
+                return list;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+            }
+
+        }
+
+        #endregion
+		
+		#region Using Lucene
+		
+		 public List<SHARE_DD_MO_TDInfo> SHARE_DD_MO_TD_GetListByLucene(string keyword, int selectTop)
+        {
+            try
+            {
+                string[] fieldSelect = {"ID","MA_DVI","SOIDTD","DT","DTPHAPLY","DTBANDO","DTDAMDSD","DTCHUAN","KTMATTIEN","KTMATHAU","CHIEUSAU","MOTAHD","VITRI","LOAIDAT","SOTOGOC","CHUAGIAO","THOIDIEMHT","HANGDAT","KHUDC","DATDOTHI","DVSUA","NGGIAODAT","NGKHAC","CHIEMDAT","MAXACU","TTDANGKY","MATDP","MADP","SOTOCU","SOTHUACU","DUNGDCDCCU","DUNGDCCU","TLDODAC","IDTL","LOAIBD","DVDO","PPDO","MUCDOCX","TYLEDO","NGAYHT","MDSDDATID","SOTHUTUMDSD","MDSD","MDSDQH","MDSDKK","MDSDCT","DIENTICH","SDCHUNG","THOIHANSD","NGID","TCHAPTCHAP","THOIHAN","MDSDTHEOTG","GHICHU","IDDC","MAKVUC","SONHA","DIACHI","MAHUYEN","LADCCU","LADCCHINH","MAXA","SOTO","SOTHUA","MOTA","IS_DELETE","CDATE","LDATE","CUSER","LUSER"};
+                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, fieldSelect, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
+                parser.SetAllowLeadingWildcard(true);
+                parser.SetDefaultOperator(QueryParser.Operator.OR);
+                keyword = keyword + "*";
+                var q = parser.Parse(keyword);
+                return this.Search(q, null, null, selectTop, false);
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+           }
+        }
+		#endregion
+		
+		#region Using Solr
+		
+		 public SHARE_DD_MO_TDInfo SHARE_DD_MO_TD_QuerySolr_GetInfo()
+		 {
+		     try
+		     {
+		         List<ISolrQuery> lstFilter = new List<ISolrQuery>();
+		         List<SortOrder> lstOrder = new List<SortOrder>();
+		         lstOrder.Add(new SortOrder("ID", Order.DESC));
+                string[] fieldSelect = {"ID","MA_DVI","SOIDTD","DT","DTPHAPLY","DTBANDO","DTDAMDSD","DTCHUAN","KTMATTIEN","KTMATHAU","CHIEUSAU","MOTAHD","VITRI","LOAIDAT","SOTOGOC","CHUAGIAO","THOIDIEMHT","HANGDAT","KHUDC","DATDOTHI","DVSUA","NGGIAODAT","NGKHAC","CHIEMDAT","MAXACU","TTDANGKY","MATDP","MADP","SOTOCU","SOTHUACU","DUNGDCDCCU","DUNGDCCU","TLDODAC","IDTL","LOAIBD","DVDO","PPDO","MUCDOCX","TYLEDO","NGAYHT","MDSDDATID","SOTHUTUMDSD","MDSD","MDSDQH","MDSDKK","MDSDCT","DIENTICH","SDCHUNG","THOIHANSD","NGID","TCHAPTCHAP","THOIHAN","MDSDTHEOTG","GHICHU","IDDC","MAKVUC","SONHA","DIACHI","MAHUYEN","LADCCU","LADCCHINH","MAXA","SOTO","SOTHUA","MOTA","IS_DELETE","CDATE","LDATE","CUSER","LUSER"};
+		         int totalRecord = 0;
+		         List<SHARE_DD_MO_TDInfo> results = QuerySolrBase<SHARE_DD_MO_TDInfo>.QuerySolr_GetAllWithPadding(Config.SOLR_URL_CORE_BASE + "SHARE_DD_MO_TD/", string.Empty, lstFilter, fieldSelect, lstOrder, 0, int.Parse(Config.SOLR_PAGE_SIZE), ref totalRecord);
+		         if (results != null && results.Count > 0)
+		         {
+		             return results[0];
+		         }
+		         return null;
+		     }
+		     catch (Exception ex)
+		     {
+		         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+		         return null;
+		     }
+		 }
+
+		 public List<SHARE_DD_MO_TDInfo> SHARE_DD_MO_TD_QuerySolr_GetAllWithPadding(string keyword, string _MA_DVI,string _LOAIDAT,string _SOTOGOC,string _SOTOCU,string _SOTHUACU,string _MAKVUC,string _MAHUYEN,string _MAXA,decimal _SOTO,decimal _SOTHUA,int _IS_DELETE, int pageIndex, int pageSize,ref int totalRecord)
+		 {
+		     try
+		     {
+		         List<ISolrQuery> lstFilter = new List<ISolrQuery>();
+		         if (!string.IsNullOrEmpty(_MA_DVI))
+		         {
+		             lstFilter.Add(new SolrQuery("MA_DVI:" + _MA_DVI));
+		         }
+		         if (!string.IsNullOrEmpty(_LOAIDAT))
+		         {
+		             lstFilter.Add(new SolrQuery("LOAIDAT:" + _LOAIDAT));
+		         }
+		         if (!string.IsNullOrEmpty(_SOTOGOC))
+		         {
+		             lstFilter.Add(new SolrQuery("SOTOGOC:" + _SOTOGOC));
+		         }
+		         if (!string.IsNullOrEmpty(_SOTOCU))
+		         {
+		             lstFilter.Add(new SolrQuery("SOTOCU:" + _SOTOCU));
+		         }
+		         if (!string.IsNullOrEmpty(_SOTHUACU))
+		         {
+		             lstFilter.Add(new SolrQuery("SOTHUACU:" + _SOTHUACU));
+		         }
+		         if (!string.IsNullOrEmpty(_MAKVUC))
+		         {
+		             lstFilter.Add(new SolrQuery("MAKVUC:" + _MAKVUC));
+		         }
+		         if (!string.IsNullOrEmpty(_MAHUYEN))
+		         {
+		             lstFilter.Add(new SolrQuery("MAHUYEN:" + _MAHUYEN));
+		         }
+		         if (!string.IsNullOrEmpty(_MAXA))
+		         {
+		             lstFilter.Add(new SolrQuery("MAXA:" + _MAXA));
+		         }
+		         if (_SOTO != -1)
+		         {
+		             lstFilter.Add(new SolrQuery("SOTO:" + _SOTO));
+		         }
+		         if (_SOTHUA != -1)
+		         {
+		             lstFilter.Add(new SolrQuery("SOTHUA:" + _SOTHUA));
+		         }
+		         if (_IS_DELETE != -1)
+		         {
+		            if(_IS_DELETE == 1)
+		            {
+		                lstFilter.Add(new SolrQuery("IS_DELETE:true"));
+		            }
+		            else if (_IS_DELETE == 0)
+		            {
+		                lstFilter.Add(new SolrQuery("IS_DELETE:false"));
+		            }
+		         }
+		         List<SortOrder> lstOrder = new List<SortOrder>();
+		         lstOrder.Add(new SortOrder("ID", Order.DESC));
+                string[] fieldSelect = {"ID","MA_DVI","SOIDTD","DT","DTPHAPLY","DTBANDO","DTDAMDSD","DTCHUAN","KTMATTIEN","KTMATHAU","CHIEUSAU","MOTAHD","VITRI","LOAIDAT","SOTOGOC","CHUAGIAO","THOIDIEMHT","HANGDAT","KHUDC","DATDOTHI","DVSUA","NGGIAODAT","NGKHAC","CHIEMDAT","MAXACU","TTDANGKY","MATDP","MADP","SOTOCU","SOTHUACU","DUNGDCDCCU","DUNGDCCU","TLDODAC","IDTL","LOAIBD","DVDO","PPDO","MUCDOCX","TYLEDO","NGAYHT","MDSDDATID","SOTHUTUMDSD","MDSD","MDSDQH","MDSDKK","MDSDCT","DIENTICH","SDCHUNG","THOIHANSD","NGID","TCHAPTCHAP","THOIHAN","MDSDTHEOTG","GHICHU","IDDC","MAKVUC","SONHA","DIACHI","MAHUYEN","LADCCU","LADCCHINH","MAXA","SOTO","SOTHUA","MOTA","IS_DELETE","CDATE","LDATE","CUSER","LUSER"};
+		         List<SHARE_DD_MO_TDInfo> results = QuerySolrBase<SHARE_DD_MO_TDInfo>.QuerySolr_GetAllWithPadding(Config.SOLR_URL_CORE_BASE + "SHARE_DD_MO_TD/", keyword, lstFilter, fieldSelect, lstOrder, pageIndex - 1, pageSize, ref totalRecord);
+		         List<SHARE_DD_MO_TDInfo> listAddRange = new List<SHARE_DD_MO_TDInfo>();
+		         if (listAddRange != null)
+		             listAddRange.AddRange(results);
+		         return listAddRange;
+		     }
+		     catch (Exception ex)
+		     {
+		         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+		         return null;
+		     }
+		 }
+		#endregion
+		
+        #region User defined
+
+        #endregion
+
+
+    }
+}

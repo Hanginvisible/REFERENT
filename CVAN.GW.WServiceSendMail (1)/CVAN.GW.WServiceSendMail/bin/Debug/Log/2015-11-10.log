@@ -1,0 +1,97 @@
+http://localhost:9090/solrTvan/HTKK_MSGO/dataimport&command=delta-import&clean=false&commit=true - {"result_code":-222,"message":"exception"}
+11/10/2015 13:48:00 - {
+  "responseHeader":{
+    "status":0,
+    "QTime":15},
+  "initArgs":[
+    "defaults",[
+      "config","db-data-config.xml"]],
+  "command":"delta-import",
+  "status":"idle",
+  "importResponse":"",
+  "statusMessages":{
+    "Total Requests made to DataSource":"201",
+    "Total Rows Fetched":"400",
+    "Total Documents Skipped":"0",
+    "Delta Dump started":"2015-11-10 15:26:57",
+    "Identifying Delta":"2015-11-10 15:26:57",
+    "Deltas Obtained":"2015-11-10 15:26:57",
+    "Building documents":"2015-11-10 15:26:57",
+    "Total Changed Documents":"200",
+    "":"Indexing completed. Added/Updated: 200 documents. Deleted 0 documents.",
+    "Committed":"2015-11-10 15:26:58",
+    "Total Documents Processed":"200",
+    "Time taken":"0:0:1.359"},
+  "WARNING":"This response format is experimental.  It is likely to change in the future."}
+
+11/10/2015 13:47:00 - {
+  "responseHeader":{
+    "status":0,
+    "QTime":0},
+  "initArgs":[
+    "defaults",[
+      "config","db-data-config.xml"]],
+  "command":"delta-import",
+  "status":"idle",
+  "importResponse":"",
+  "statusMessages":{
+    "Total Requests made to DataSource":"1",
+    "Total Rows Fetched":"0",
+    "Total Documents Skipped":"0",
+    "Delta Dump started":"2015-11-10 09:58:04",
+    "Identifying Delta":"2015-11-10 09:58:04",
+    "Deltas Obtained":"2015-11-10 09:58:04",
+    "Building documents":"2015-11-10 09:58:04",
+    "Total Changed Documents":"0",
+    "Total Documents Processed":"0",
+    "Time taken":"0:0:0.16"},
+  "WARNING":"This response format is experimental.  It is likely to change in the future."}
+
+11/10/2015 13:49:00 - {
+  "responseHeader":{
+    "status":0,
+    "QTime":0},
+  "initArgs":[
+    "defaults",[
+      "config","db-data-config.xml"]],
+  "command":"delta-import",
+  "status":"idle",
+  "importResponse":"",
+  "statusMessages":{
+    "Total Requests made to DataSource":"1",
+    "Total Rows Fetched":"0",
+    "Total Documents Skipped":"0",
+    "Delta Dump started":"2015-11-10 15:31:40",
+    "Identifying Delta":"2015-11-10 15:31:40",
+    "Deltas Obtained":"2015-11-10 15:31:40",
+    "Building documents":"2015-11-10 15:31:40",
+    "Total Changed Documents":"0",
+    "Total Documents Processed":"0",
+    "Time taken":"0:0:0.16"},
+  "WARNING":"This response format is experimental.  It is likely to change in the future."}
+
+11/10/2015 13:48:00 - {
+  "responseHeader":{
+    "status":0,
+    "QTime":15},
+  "initArgs":[
+    "defaults",[
+      "config","db-data-config.xml"]],
+  "command":"delta-import",
+  "status":"idle",
+  "importResponse":"",
+  "statusMessages":{
+    "Total Requests made to DataSource":"656",
+    "Total Rows Fetched":"1310",
+    "Total Documents Skipped":"0",
+    "Delta Dump started":"2015-11-10 15:32:41",
+    "Identifying Delta":"2015-11-10 15:32:41",
+    "Deltas Obtained":"2015-11-10 15:32:41",
+    "Building documents":"2015-11-10 15:32:41",
+    "Total Changed Documents":"655",
+    "":"Indexing completed. Added/Updated: 655 documents. Deleted 0 documents.",
+    "Committed":"2015-11-10 15:32:46",
+    "Total Documents Processed":"655",
+    "Time taken":"0:0:4.813"},
+  "WARNING":"This response format is experimental.  It is likely to change in the future."}
+

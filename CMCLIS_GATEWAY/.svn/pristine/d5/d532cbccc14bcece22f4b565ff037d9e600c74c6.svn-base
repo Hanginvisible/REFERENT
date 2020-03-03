@@ -1,0 +1,165 @@
+﻿using System;
+using System.Collections.Generic;
+using SolrNet;
+using Lucene.Net.QueryParsers;
+using Lucene.Net.Analysis.Standard;
+using Oracle.DataAccess.Client;
+using CMCLIS.GATEWAY.ENTITY;
+using CMCLIS.GATEWAY.SETTING;
+using CMCLIS.GATEWAY.CORE;
+using CMCLIS.GATEWAY.CORE.Provider;
+using CMCLIS.GATEWAY.CORE.Solr;
+
+namespace CMCLIS.GATEWAY.DATA.OBJECTS
+{
+	//------------------------------------------------------------------------------------------------------------------------
+	//-- Created By: Ngô Văn Nghị
+	//-- Date: 02/19/2020 11:47:54 AM
+	//-- Todo: 
+	//------------------------------------------------------------------------------------------------------------------------ 
+    public class CVAN_DM_LT_THUEDao : OracleBaseImpl<CVAN_DM_LT_THUEInfo>
+    {
+        protected override void SetInfoDerivedClass()
+        {
+			TableName = "CVAN_DM_LT_THUE";
+			PackageName = "PK_CVAN_DM_LT_THUE";
+			ConnectionString = Config.DictConnectionString[Constant.CONNECTION_STRING_DATA_ORACLE];            
+            LuceneIndexData = Config.ORACLEGetInfoIndexLucene.ContainsKey(TableName) ? Config.ORACLEGetInfoIndexLucene[TableName] : Config.ORACLESetIndexLucene(TableName)[TableName];			
+        }
+
+        #region relationship support
+       
+        #endregion
+
+        #region Get List
+
+        public List<CVAN_DM_LT_THUEInfo> CVAN_DM_LT_THUE_GetAllWithPadding(string _CVAN_CODE,string _CVAN_NAME,string _CVAN_PARENT,int _CVAN_STATUS,int pageIndex, int pageSize,ref int totalRecord)
+        {
+            OracleParameter[] sqlParam = {
+                                        new OracleParameter("p_CVAN_CODE",_CVAN_CODE),
+                                        new OracleParameter("p_CVAN_NAME",_CVAN_NAME),
+                                        new OracleParameter("p_CVAN_PARENT",_CVAN_PARENT),
+                                        new OracleParameter("p_CVAN_STATUS",_CVAN_STATUS),
+                                    };
+            try
+            {
+                List<CVAN_DM_LT_THUEInfo> list = this.ExecuteQuery("usp_GET_ALL_WITH_PADDING", sqlParam, pageIndex, pageSize, ref totalRecord);
+                return list;
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+            }
+
+        }
+
+        #endregion
+		
+		#region Using Lucene
+		
+		 public List<CVAN_DM_LT_THUEInfo> CVAN_DM_LT_THUE_GetListByLucene(string keyword, int selectTop)
+        {
+            try
+            {
+                string[] fieldSelect = {"ID","CVAN_CODE","CVAN_NAME","CVAN_PARENT","CVAN_PARENT_NAME","CVAN_DESCRIPTION","CVAN_STATUS","CDATE","LDATE","CUSER","LUSER"};
+                var parser = new MultiFieldQueryParser(Lucene.Net.Util.Version.LUCENE_29, fieldSelect, new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_29));
+                parser.SetAllowLeadingWildcard(true);
+                parser.SetDefaultOperator(QueryParser.Operator.OR);
+                keyword = keyword + "*";
+                var q = parser.Parse(keyword);
+                return this.Search(q, null, null, selectTop, false);
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return null;
+           }
+        }
+		#endregion
+		
+		#region Using Solr
+		
+		 public CVAN_DM_LT_THUEInfo CVAN_DM_LT_THUE_QuerySolr_GetInfo(string _CVAN_CODE,string _CVAN_PARENT)
+		 {
+		     try
+		     {
+		         List<ISolrQuery> lstFilter = new List<ISolrQuery>();
+		         if (!string.IsNullOrEmpty(_CVAN_CODE))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_CODE:" + _CVAN_CODE));
+		         }
+		         if (!string.IsNullOrEmpty(_CVAN_PARENT))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_PARENT:" + _CVAN_PARENT));
+		         }
+		         List<SortOrder> lstOrder = new List<SortOrder>();
+		         lstOrder.Add(new SortOrder("ID", Order.DESC));
+                string[] fieldSelect = {"ID","CVAN_CODE","CVAN_NAME","CVAN_PARENT","CVAN_PARENT_NAME","CVAN_DESCRIPTION","CVAN_STATUS","CDATE","LDATE","CUSER","LUSER"};
+		         int totalRecord = 0;
+		         List<CVAN_DM_LT_THUEInfo> results = QuerySolrBase<CVAN_DM_LT_THUEInfo>.QuerySolr_GetAllWithPadding(Config.SOLR_URL_CORE_BASE + "CVAN_DM_LT_THUE/", string.Empty, lstFilter, fieldSelect, lstOrder, 0, int.Parse(Config.SOLR_PAGE_SIZE), ref totalRecord);
+		         if (results != null && results.Count > 0)
+		         {
+		             return results[0];
+		         }
+		         return null;
+		     }
+		     catch (Exception ex)
+		     {
+		         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+		         return null;
+		     }
+		 }
+
+		 public List<CVAN_DM_LT_THUEInfo> CVAN_DM_LT_THUE_QuerySolr_GetAllWithPadding(string keyword, string _CVAN_CODE,string _CVAN_NAME,string _CVAN_PARENT,int _CVAN_STATUS, int pageIndex, int pageSize,ref int totalRecord)
+		 {
+		     try
+		     {
+		         List<ISolrQuery> lstFilter = new List<ISolrQuery>();
+		         if (!string.IsNullOrEmpty(_CVAN_CODE))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_CODE:" + _CVAN_CODE));
+		         }
+		         if (!string.IsNullOrEmpty(_CVAN_NAME))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_NAME:" + _CVAN_NAME));
+		         }
+		         if (!string.IsNullOrEmpty(_CVAN_PARENT))
+		         {
+		             lstFilter.Add(new SolrQuery("CVAN_PARENT:" + _CVAN_PARENT));
+		         }
+		         if (_CVAN_STATUS != -1)
+		         {
+		            if(_CVAN_STATUS == 1)
+		            {
+		                lstFilter.Add(new SolrQuery("STATUS:true"));
+		            }
+		            else if (_CVAN_STATUS == 0)
+		            {
+		                lstFilter.Add(new SolrQuery("STATUS:false"));
+		            }
+		         }
+		         List<SortOrder> lstOrder = new List<SortOrder>();
+		         lstOrder.Add(new SortOrder("ID", Order.DESC));
+                string[] fieldSelect = {"ID","CVAN_CODE","CVAN_NAME","CVAN_PARENT","CVAN_PARENT_NAME","CVAN_DESCRIPTION","CVAN_STATUS","CDATE","LDATE","CUSER","LUSER"};
+		         List<CVAN_DM_LT_THUEInfo> results = QuerySolrBase<CVAN_DM_LT_THUEInfo>.QuerySolr_GetAllWithPadding(Config.SOLR_URL_CORE_BASE + "CVAN_DM_LT_THUE/", keyword, lstFilter, fieldSelect, lstOrder, pageIndex - 1, pageSize, ref totalRecord);
+		         List<CVAN_DM_LT_THUEInfo> listAddRange = new List<CVAN_DM_LT_THUEInfo>();
+		         if (listAddRange != null)
+		             listAddRange.AddRange(results);
+		         return listAddRange;
+		     }
+		     catch (Exception ex)
+		     {
+		         LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+		         return null;
+		     }
+		 }
+		#endregion
+		
+        #region User defined
+
+        #endregion
+
+
+    }
+}

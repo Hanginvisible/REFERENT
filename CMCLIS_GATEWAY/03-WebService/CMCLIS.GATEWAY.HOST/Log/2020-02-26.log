@@ -1,0 +1,192 @@
+{
+  "Guid":"e6e3c9c3-e48c-467a-a57d-99f21da77d3d",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 10:57:31 AM",
+  "Source":"[LOG_CHUC_NANG_GetAllWithPadding]",
+  "Message":"The DateTime represented by the string is not supported in calendar System.Globalization.GregorianCalendar.",
+  "StackTrace":"   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)\r\n   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)\r\n   at CMCLIS.GATEWAY.SERVICES.API_LOG.LOG_CHUC_NANG_GetAllWithPadding(String USER_NAME, String FUNCTION_NAME, String ACTION, String TIME_START_DATE, String TIME_END_DATE, String pageIndex, String pageSize) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SERVICES\\API_LOG\\API_LOG.cs:line 203",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 10:57:31 AM"
+},
+{
+  "Guid":"9f852fed-24b6-4e54-9381-519ec6c5176a",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:01:06 AM",
+  "Source":"[LOG_CHUC_NANG_GetAllWithPadding]",
+  "Message":"The DateTime represented by the string is not supported in calendar System.Globalization.GregorianCalendar.",
+  "StackTrace":"   at System.DateTimeParse.ParseExact(String s, String format, DateTimeFormatInfo dtfi, DateTimeStyles style)\r\n   at System.DateTime.ParseExact(String s, String format, IFormatProvider provider)\r\n   at CMCLIS.GATEWAY.SERVICES.API_LOG.LOG_CHUC_NANG_GetAllWithPadding(String USER_NAME, String FUNCTION_NAME, String ACTION, String TIME_START_DATE, String TIME_END_DATE, String pageIndex, String pageSize) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.SERVICES\\API_LOG\\API_LOG.cs:line 203",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:01:06 AM"
+},
+{
+  "Guid":"19b40a76-1f9e-4e2d-bf9a-58b672b395a2",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:01:50 AM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>6</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,USER_NAME,FUNCTION_NAME,ACTION,TIME,ERROR,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>USER_NAME:hthang</str><str>FUNCTION_NAME:String content</str><str>ACTION:Add new log</str><str>TIME:[1582563600000+0700 TO 1582649999000+0700]</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>5</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>Invalid Date String:'1582563600000+0700'</str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:01:50 AM"
+},
+{
+  "Guid":"6fda2996-58f8-4ba7-86b5-3ca1ce3341fc",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:01:51 AM",
+  "Source":"[LOG_CHUC_NANG_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.LOG_CHUC_NANGDao.LOG_CHUC_NANG_QuerySolr_GetAllWithPadding(String keyword, String _USER_NAME, String _FUNCTION_NAME, String _ACTION, Nullable`1 _TIME_START_DATE, Nullable`1 _TIME_END_DATE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\LOG_CHUC_NANGDao.cs:line 146",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:01:51 AM"
+},
+{
+  "Guid":"8d167809-5b90-4c80-bab4-8b1793268074",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:02:04 AM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>6</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,USER_NAME,FUNCTION_NAME,ACTION,TIME,ERROR,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>USER_NAME:hthang</str><str>FUNCTION_NAME:String content</str><str>ACTION:Add new log</str><str>TIME:[1582563600000+0700 TO 1582649999000+0700]</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>1</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>Invalid Date String:'1582563600000+0700'</str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:02:04 AM"
+},
+{
+  "Guid":"d96bad91-3522-4335-87e0-b4981efaadc9",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:02:04 AM",
+  "Source":"[LOG_CHUC_NANG_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.LOG_CHUC_NANGDao.LOG_CHUC_NANG_QuerySolr_GetAllWithPadding(String keyword, String _USER_NAME, String _FUNCTION_NAME, String _ACTION, Nullable`1 _TIME_START_DATE, Nullable`1 _TIME_END_DATE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\LOG_CHUC_NANGDao.cs:line 146",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:02:04 AM"
+},
+{
+  "Guid":"44c2b6c6-e340-4afd-9b58-bc7873807a2d",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:09:45 AM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>5</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,USER_NAME,FUNCTION_NAME,ACTION,TIME,ERROR,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>USER_NAME:hthang</str><str>FUNCTION_NAME:String content</str><str>ACTION:Add new log</str><str>TIME:[1582563600000+0700 TO 1582649999000+0700]</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>5</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>Invalid Date String:'1582563600000+0700'</str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:09:45 AM"
+},
+{
+  "Guid":"ab80d66f-9316-4eaf-8843-6af0d2e25e78",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:09:45 AM",
+  "Source":"[LOG_CHUC_NANG_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.LOG_CHUC_NANGDao.LOG_CHUC_NANG_QuerySolr_GetAllWithPadding(String keyword, String _USER_NAME, String _FUNCTION_NAME, String _ACTION, Nullable`1 _TIME_START_DATE, Nullable`1 _TIME_END_DATE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\LOG_CHUC_NANGDao.cs:line 146",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:09:45 AM"
+},
+{
+  "Guid":"58ab3f7a-be0f-41c7-803a-6d33159136cd",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:11:28 AM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>9</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,USER_NAME,FUNCTION_NAME,ACTION,TIME,ERROR,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>USER_NAME:hthang</str><str>FUNCTION_NAME:String content</str><str>ACTION:Add new log</str><str>TIME:[1582563600000+0700 TO 1582649999000+0700]</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>5</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>Invalid Date String:'1582563600000+0700'</str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:11:28 AM"
+},
+{
+  "Guid":"f9631b91-2ae7-408a-a81e-dafd503cf639",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:11:28 AM",
+  "Source":"[LOG_CHUC_NANG_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.LOG_CHUC_NANGDao.LOG_CHUC_NANG_QuerySolr_GetAllWithPadding(String keyword, String _USER_NAME, String _FUNCTION_NAME, String _ACTION, Nullable`1 _TIME_START_DATE, Nullable`1 _TIME_END_DATE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\LOG_CHUC_NANGDao.cs:line 146",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:11:28 AM"
+},
+{
+  "Guid":"8521ac1c-e862-4d37-9afa-123e401e3ed3",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:21:01 AM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>25</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,USER_NAME,FUNCTION_NAME,ACTION,TIME,ERROR,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>USER_NAME:hthang</str><str>FUNCTION_NAME:String content</str><str>ACTION:Add new log</str><str>TIME:[1582563600000+0700 TO 1582649999000+0700]</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>5</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>Invalid Date String:'1582563600000+0700'</str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:21:01 AM"
+},
+{
+  "Guid":"dce4bbd2-f841-4723-b301-66dd264e0ba5",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 11:21:01 AM",
+  "Source":"[LOG_CHUC_NANG_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.LOG_CHUC_NANGDao.LOG_CHUC_NANG_QuerySolr_GetAllWithPadding(String keyword, String _USER_NAME, String _FUNCTION_NAME, String _ACTION, Nullable`1 _TIME_START_DATE, Nullable`1 _TIME_END_DATE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\LOG_CHUC_NANGDao.cs:line 146",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 11:21:01 AM"
+},
+{
+  "Guid":"bc5e1cab-1c1a-41d4-9d10-46945d48e928",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 2:59:54 PM",
+  "Source":"[QuerySolr_GetAllWithPadding]",
+  "Message":"<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<lst name='responseHeader'><int name='status'>400</int><int name='QTime'>4</int><lst name='params'><str name='q'>*:*</str><str name='fl'>ID,USER_NAME,FUNCTION_NAME,ACTION,TIME,ERROR,IS_DELETE,CDATE,LDATE,CUSER,LUSER</str><str name='start'>0</str><arr name='fq'><str>USER_NAME:HTHANG</str><str>FUNCTION_NAME:Insert</str><str>ACTION:LOG_CHUC_NANG</str><str>TIME:[1582563600000+0700 TO 1582649999000+0700]</str><str>IS_DELETE:false</str></arr><str name='sort'>ID desc</str><str name='rows'>1</str><str name='version'>2.2</str></lst></lst><lst name='error'><str name='msg'>Invalid Date String:'1582563600000+0700'</str><int name='code'>400</int></lst>
+</response>
+",
+  "StackTrace":"   at SolrNet.Impl.SolrConnection.Get(String relativeUrl, IEnumerable`1 parameters)\r\n   at SolrNet.Impl.SolrQueryExecuter`1.Execute(ISolrQuery q, QueryOptions options)\r\n   at SolrNet.Impl.SolrBasicServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at SolrNet.Impl.SolrServer`1.Query(ISolrQuery query, QueryOptions options)\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr(String urlLoad, AbstractSolrQuery query, QueryOptions queryOptions) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 66\r\n   at CMCLIS.GATEWAY.CORE.Solr.QuerySolrBase`1.QuerySolr_GetAllWithPadding(String url, String keyword, List`1 lstFilter, String[] fieldSelect, List`1 lstOrder, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.CORE\\Solr\\QuerySolrBase.cs:line 48",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 2:59:54 PM"
+},
+{
+  "Guid":"d7448ea1-fe50-4967-86aa-3c4bf417510d",
+  "Version":"VERSION : 1.0",
+  "Product":"CỔNG TIẾP NHẬN HỒ SƠ ĐỊA CHÍNH",
+  "Date":"2/26/2020 2:59:54 PM",
+  "Source":"[LOG_CHUC_NANG_QuerySolr_GetAllWithPadding]",
+  "Message":"Value cannot be null.\r\nParameter name: collection",
+  "StackTrace":"   at System.Collections.Generic.List`1.InsertRange(Int32 index, IEnumerable`1 collection)\r\n   at System.Collections.Generic.List`1.AddRange(IEnumerable`1 collection)\r\n   at CMCLIS.GATEWAY.DATA.OBJECTS.LOG_CHUC_NANGDao.LOG_CHUC_NANG_QuerySolr_GetAllWithPadding(String keyword, String _USER_NAME, String _FUNCTION_NAME, String _ACTION, Nullable`1 _TIME_START_DATE, Nullable`1 _TIME_END_DATE, Int32 _IS_DELETE, Int32 pageIndex, Int32 pageSize, Int32& totalRecord) in E:\\CMCLIS\\CMCLIS_GATEWAY\\01-Base\\CMCLIS.GATEWAY.DATA.OBJECTS\\Implementation\\CORE_BASE\\LOG_CHUC_NANGDao.cs:line 146",
+  "Status":"0",
+  "AssignedTo":"",
+  "CreatedBy":"2/26/2020 2:59:54 PM"
+},

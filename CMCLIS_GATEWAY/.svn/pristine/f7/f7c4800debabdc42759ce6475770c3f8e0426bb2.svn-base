@@ -1,0 +1,2212 @@
+﻿using Aspose.Cells;
+using CMCLIS.GATEWAY.CORE;
+using CMCLIS.GATEWAY.CORE.Redis;
+using CMCLIS.GATEWAY.CORE.Sercurity;
+using CMCLIS.GATEWAY.DATA.OBJECTS;
+using CMCLIS.GATEWAY.ENTITY;
+using CMCLIS.GATEWAY.SETTING;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.ServiceModel;
+using System.ServiceModel.Activation;
+using System.ServiceModel.Channels;
+using System.Web;
+
+namespace CMCLIS.GATEWAY.SERVICES
+{
+
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+    public class API_LOG : IAPI_LOG
+    {
+        private static string Authorization = string.Empty;
+        protected API_LOG()
+        {
+            var request = OperationContext.Current.IncomingMessageProperties[HttpRequestMessageProperty.Name] as HttpRequestMessageProperty;
+            Authorization = request.Headers[Config.API_KEY];
+            if (string.IsNullOrEmpty(Authorization))
+            {
+                Authorization = Config.KEY_AUTHORIZATION;
+            }
+
+        }
+
+        #region Create Functions "LOG_CHUC_NANG"
+        public Response LOG_CHUC_NANG_Add(LOG_CHUC_NANGInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_CHUC_NANG().Add(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_ADD : Constant.MESSAGE_ERROR_ADD,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_ADD,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_CHUC_NANG_Update(LOG_CHUC_NANGInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_CHUC_NANG().Update(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_UPDATE : Constant.MESSAGE_ERROR_UPDATE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_UPDATE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_CHUC_NANG_Delete(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_CHUC_NANG().Delete(int.Parse(ID));
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_DELETE : Constant.MESSAGE_ERROR_DELETE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_DELETE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public ResponseInfo<LOG_CHUC_NANGInfo> LOG_CHUC_NANG_GetInfo(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    LOG_CHUC_NANGInfo result = DataObjectFactory.GetInstanceLOG_CHUC_NANG().GetInfo(int.Parse(ID));
+                    return new ResponseInfo<LOG_CHUC_NANGInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? 1 : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseInfo<LOG_CHUC_NANGInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseInfo<LOG_CHUC_NANGInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponseList<LOG_CHUC_NANGInfo> LOG_CHUC_NANG_GetList()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    List<LOG_CHUC_NANGInfo> result = DataObjectFactory.GetInstanceLOG_CHUC_NANG().GetList();
+                    return new ResponseList<LOG_CHUC_NANGInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? result.Count : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseList<LOG_CHUC_NANGInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<LOG_CHUC_NANGInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponsePage<LOG_CHUC_NANGInfo> LOG_CHUC_NANG_GetAllWithPadding(string USER_NAME, string FUNCTION_NAME, string ACTION, string TIME_START_DATE, string TIME_END_DATE, string pageIndex, string pageSize)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int totalRecords = 0;
+                    USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                    FUNCTION_NAME = FUNCTION_NAME == "-1" ? string.Empty : FUNCTION_NAME;
+                    ACTION = ACTION == "-1" ? string.Empty : ACTION;
+                    DateTime _TIME_START_DATE = TIME_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(TIME_START_DATE.Split('-')[2]), int.Parse(TIME_START_DATE.Split('-')[1]), int.Parse(TIME_START_DATE.Split('-')[0]), 0, 0, 0);
+                    DateTime _TIME_END_DATE = TIME_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(TIME_END_DATE.Split('-')[2]), int.Parse(TIME_END_DATE.Split('-')[1]), int.Parse(TIME_END_DATE.Split('-')[0]), 23, 59, 59);
+                    List<LOG_CHUC_NANGInfo> result = DataObjectFactory.GetInstanceLOG_CHUC_NANG().LOG_CHUC_NANG_GetAllWithPadding(USER_NAME, FUNCTION_NAME, ACTION, _TIME_START_DATE, _TIME_END_DATE, int.Parse(pageIndex), int.Parse(pageSize), ref totalRecords);
+                    return new ResponsePage<LOG_CHUC_NANGInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = result != null ? totalRecords : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponsePage<LOG_CHUC_NANGInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponsePage<LOG_CHUC_NANGInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    PageIndex = int.Parse(pageIndex),
+                    PageSize = int.Parse(pageSize),
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public Response LOG_CHUC_NANG_EXPORT_TEMPLATE(string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_CHUC_NANG_EXPORT_TEMPLATE.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_CHUC_NANG_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_CHUC_NANG_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+        public Response LOG_CHUC_NANG_EXPORT_DATA(string USER_NAME, string FUNCTION_NAME, string ACTION, string TIME_START_DATE, string TIME_END_DATE, string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_CHUC_NANG_EXPORT_DATA.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        int totalRecords = 0;
+                        USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                        FUNCTION_NAME = FUNCTION_NAME == "-1" ? string.Empty : FUNCTION_NAME;
+                        ACTION = ACTION == "-1" ? string.Empty : ACTION;
+                        DateTime _TIME_START_DATE = TIME_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(TIME_START_DATE.Split('-')[2]), int.Parse(TIME_START_DATE.Split('-')[1]), int.Parse(TIME_START_DATE.Split('-')[0]), 0, 0, 0);
+                        DateTime _TIME_END_DATE = TIME_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(TIME_END_DATE.Split('-')[2]), int.Parse(TIME_END_DATE.Split('-')[1]), int.Parse(TIME_END_DATE.Split('-')[0]), 23, 59, 59);
+                        List<LOG_CHUC_NANGInfo> resultLOG_CHUC_NANG = DataObjectFactory.GetInstanceLOG_CHUC_NANG().LOG_CHUC_NANG_GetAllWithPadding(USER_NAME, FUNCTION_NAME, ACTION, _TIME_START_DATE, _TIME_END_DATE, 1, int.MaxValue, ref totalRecords);
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        DataTable dataTableLOG_CHUC_NANG = DataObjectFactory.GetInstanceLOG_CHUC_NANG().ToDataTable(resultLOG_CHUC_NANG);
+                        designer.SetDataSource("LOG_CHUC_NANG", dataTableLOG_CHUC_NANG.DefaultView);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_CHUC_NANG_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_CHUC_NANG_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                            case "pdf":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.pdf", "LOG_CHUC_NANG_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Pdf);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+
+        #endregion
+        #region Create Functions "LOG_DATA"
+        public Response LOG_DATA_Add(LOG_DATAInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_DATA().Add(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_ADD : Constant.MESSAGE_ERROR_ADD,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_ADD,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_DATA_Update(LOG_DATAInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_DATA().Update(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_UPDATE : Constant.MESSAGE_ERROR_UPDATE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_UPDATE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_DATA_Delete(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_DATA().Delete(int.Parse(ID));
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_DELETE : Constant.MESSAGE_ERROR_DELETE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_DELETE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public ResponseInfo<LOG_DATAInfo> LOG_DATA_GetInfo(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    LOG_DATAInfo result = DataObjectFactory.GetInstanceLOG_DATA().GetInfo(int.Parse(ID));
+                    return new ResponseInfo<LOG_DATAInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? 1 : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseInfo<LOG_DATAInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseInfo<LOG_DATAInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponseList<LOG_DATAInfo> LOG_DATA_GetList()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    List<LOG_DATAInfo> result = DataObjectFactory.GetInstanceLOG_DATA().GetList();
+                    return new ResponseList<LOG_DATAInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? result.Count : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseList<LOG_DATAInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<LOG_DATAInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponsePage<LOG_DATAInfo> LOG_DATA_GetAllWithPadding(string IP, string PORT, string APPLICATION_NAME, string MESSAGE, string LOG_TYPE, string CDATE_START_DATE, string CDATE_END_DATE, string pageIndex, string pageSize)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int totalRecords = 0;
+                    IP = IP == "-1" ? string.Empty : IP;
+                    APPLICATION_NAME = APPLICATION_NAME == "-1" ? string.Empty : APPLICATION_NAME;
+                    MESSAGE = MESSAGE == "-1" ? string.Empty : MESSAGE;
+                    DateTime _CDATE_START_DATE = CDATE_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(CDATE_START_DATE.Split('-')[2]), int.Parse(CDATE_START_DATE.Split('-')[1]), int.Parse(CDATE_START_DATE.Split('-')[0]), 0, 0, 0);
+                    DateTime _CDATE_END_DATE = CDATE_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(CDATE_END_DATE.Split('-')[2]), int.Parse(CDATE_END_DATE.Split('-')[1]), int.Parse(CDATE_END_DATE.Split('-')[0]), 23, 59, 59);
+                    List<LOG_DATAInfo> result = DataObjectFactory.GetInstanceLOG_DATA().LOG_DATA_GetAllWithPadding(IP, int.Parse(PORT), APPLICATION_NAME, MESSAGE, int.Parse(LOG_TYPE), _CDATE_START_DATE, _CDATE_END_DATE, int.Parse(pageIndex), int.Parse(pageSize), ref totalRecords);
+                    return new ResponsePage<LOG_DATAInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = result != null ? totalRecords : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponsePage<LOG_DATAInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponsePage<LOG_DATAInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    PageIndex = int.Parse(pageIndex),
+                    PageSize = int.Parse(pageSize),
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public Response LOG_DATA_EXPORT_TEMPLATE(string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_DATA_EXPORT_TEMPLATE.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_DATA_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_DATA_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+        public Response LOG_DATA_EXPORT_DATA(string IP, string PORT, string APPLICATION_NAME, string MESSAGE, string LOG_TYPE, string CDATE_START_DATE, string CDATE_END_DATE, string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_DATA_EXPORT_DATA.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        int totalRecords = 0;
+                        IP = IP == "-1" ? string.Empty : IP;
+                        APPLICATION_NAME = APPLICATION_NAME == "-1" ? string.Empty : APPLICATION_NAME;
+                        MESSAGE = MESSAGE == "-1" ? string.Empty : MESSAGE;
+                        DateTime _CDATE_START_DATE = CDATE_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(CDATE_START_DATE.Split('-')[2]), int.Parse(CDATE_START_DATE.Split('-')[1]), int.Parse(CDATE_START_DATE.Split('-')[0]), 0, 0, 0);
+                        DateTime _CDATE_END_DATE = CDATE_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(CDATE_END_DATE.Split('-')[2]), int.Parse(CDATE_END_DATE.Split('-')[1]), int.Parse(CDATE_END_DATE.Split('-')[0]), 23, 59, 59);
+                        List<LOG_DATAInfo> resultLOG_DATA = DataObjectFactory.GetInstanceLOG_DATA().LOG_DATA_GetAllWithPadding(IP, int.Parse(PORT), APPLICATION_NAME, MESSAGE, int.Parse(LOG_TYPE), _CDATE_START_DATE, _CDATE_END_DATE, 1, int.MaxValue, ref totalRecords);
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        DataTable dataTableLOG_DATA = DataObjectFactory.GetInstanceLOG_DATA().ToDataTable(resultLOG_DATA);
+                        designer.SetDataSource("LOG_DATA", dataTableLOG_DATA.DefaultView);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_DATA_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_DATA_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                            case "pdf":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.pdf", "LOG_DATA_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Pdf);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+
+        #endregion
+        #region Create Functions "LOG_DU_LIEU_DB"
+        public Response LOG_DU_LIEU_DB_Add(LOG_DU_LIEU_DBInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_DU_LIEU_DB().Add(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_ADD : Constant.MESSAGE_ERROR_ADD,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_ADD,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_DU_LIEU_DB_Update(LOG_DU_LIEU_DBInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_DU_LIEU_DB().Update(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_UPDATE : Constant.MESSAGE_ERROR_UPDATE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_UPDATE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_DU_LIEU_DB_Delete(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_DU_LIEU_DB().Delete(int.Parse(ID));
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_DELETE : Constant.MESSAGE_ERROR_DELETE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_DELETE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public ResponseInfo<LOG_DU_LIEU_DBInfo> LOG_DU_LIEU_DB_GetInfo(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    LOG_DU_LIEU_DBInfo result = DataObjectFactory.GetInstanceLOG_DU_LIEU_DB().GetInfo(int.Parse(ID));
+                    return new ResponseInfo<LOG_DU_LIEU_DBInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? 1 : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseInfo<LOG_DU_LIEU_DBInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseInfo<LOG_DU_LIEU_DBInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponseList<LOG_DU_LIEU_DBInfo> LOG_DU_LIEU_DB_GetList()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    List<LOG_DU_LIEU_DBInfo> result = DataObjectFactory.GetInstanceLOG_DU_LIEU_DB().GetList();
+                    return new ResponseList<LOG_DU_LIEU_DBInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? result.Count : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseList<LOG_DU_LIEU_DBInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<LOG_DU_LIEU_DBInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponsePage<LOG_DU_LIEU_DBInfo> LOG_DU_LIEU_DB_GetAllWithPadding(string USER_NAME, string TABLE_NAME, string ACTION, string CDATE_START_DATE, string CDATE_END_DATE, string pageIndex, string pageSize)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int totalRecords = 0;
+                    USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                    TABLE_NAME = TABLE_NAME == "-1" ? string.Empty : TABLE_NAME;
+                    ACTION = ACTION == "-1" ? string.Empty : ACTION;
+                    DateTime _CDATE_START_DATE = CDATE_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(CDATE_START_DATE.Split('-')[2]), int.Parse(CDATE_START_DATE.Split('-')[1]), int.Parse(CDATE_START_DATE.Split('-')[0]), 0, 0, 0);
+                    DateTime _CDATE_END_DATE = CDATE_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(CDATE_END_DATE.Split('-')[2]), int.Parse(CDATE_END_DATE.Split('-')[1]), int.Parse(CDATE_END_DATE.Split('-')[0]), 23, 59, 59);
+                    List<LOG_DU_LIEU_DBInfo> result = DataObjectFactory.GetInstanceLOG_DU_LIEU_DB().LOG_DU_LIEU_DB_GetAllWithPadding(USER_NAME, TABLE_NAME, ACTION, _CDATE_START_DATE, _CDATE_END_DATE, int.Parse(pageIndex), int.Parse(pageSize), ref totalRecords);
+                    return new ResponsePage<LOG_DU_LIEU_DBInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = result != null ? totalRecords : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponsePage<LOG_DU_LIEU_DBInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponsePage<LOG_DU_LIEU_DBInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    PageIndex = int.Parse(pageIndex),
+                    PageSize = int.Parse(pageSize),
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public Response LOG_DU_LIEU_DB_EXPORT_TEMPLATE(string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_DU_LIEU_DB_EXPORT_TEMPLATE.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_DU_LIEU_DB_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_DU_LIEU_DB_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+        public Response LOG_DU_LIEU_DB_EXPORT_DATA(string USER_NAME, string TABLE_NAME, string ACTION, string CDATE_START_DATE, string CDATE_END_DATE, string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_DU_LIEU_DB_EXPORT_DATA.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        int totalRecords = 0;
+                        USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                        TABLE_NAME = TABLE_NAME == "-1" ? string.Empty : TABLE_NAME;
+                        ACTION = ACTION == "-1" ? string.Empty : ACTION;
+                        DateTime _CDATE_START_DATE = CDATE_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(CDATE_START_DATE.Split('-')[2]), int.Parse(CDATE_START_DATE.Split('-')[1]), int.Parse(CDATE_START_DATE.Split('-')[0]), 0, 0, 0);
+                        DateTime _CDATE_END_DATE = CDATE_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(CDATE_END_DATE.Split('-')[2]), int.Parse(CDATE_END_DATE.Split('-')[1]), int.Parse(CDATE_END_DATE.Split('-')[0]), 23, 59, 59);
+                        List<LOG_DU_LIEU_DBInfo> resultLOG_DU_LIEU_DB = DataObjectFactory.GetInstanceLOG_DU_LIEU_DB().LOG_DU_LIEU_DB_GetAllWithPadding(USER_NAME, TABLE_NAME, ACTION, _CDATE_START_DATE, _CDATE_END_DATE, 1, int.MaxValue, ref totalRecords);
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        DataTable dataTableLOG_DU_LIEU_DB = DataObjectFactory.GetInstanceLOG_DU_LIEU_DB().ToDataTable(resultLOG_DU_LIEU_DB);
+                        designer.SetDataSource("LOG_DU_LIEU_DB", dataTableLOG_DU_LIEU_DB.DefaultView);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_DU_LIEU_DB_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_DU_LIEU_DB_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                            case "pdf":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.pdf", "LOG_DU_LIEU_DB_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Pdf);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+
+        #endregion
+        #region Create Functions "LOG_TRUY_CAP"
+        public Response LOG_TRUY_CAP_Add(LOG_TRUY_CAPInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_TRUY_CAP().Add(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_ADD : Constant.MESSAGE_ERROR_ADD,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_ADD,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_TRUY_CAP_Update(LOG_TRUY_CAPInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_TRUY_CAP().Update(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_UPDATE : Constant.MESSAGE_ERROR_UPDATE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_UPDATE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_TRUY_CAP_Delete(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_TRUY_CAP().Delete(int.Parse(ID));
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_DELETE : Constant.MESSAGE_ERROR_DELETE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_DELETE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public ResponseInfo<LOG_TRUY_CAPInfo> LOG_TRUY_CAP_GetInfo(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    LOG_TRUY_CAPInfo result = DataObjectFactory.GetInstanceLOG_TRUY_CAP().GetInfo(int.Parse(ID));
+                    return new ResponseInfo<LOG_TRUY_CAPInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? 1 : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseInfo<LOG_TRUY_CAPInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseInfo<LOG_TRUY_CAPInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponseList<LOG_TRUY_CAPInfo> LOG_TRUY_CAP_GetList()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    List<LOG_TRUY_CAPInfo> result = DataObjectFactory.GetInstanceLOG_TRUY_CAP().GetList();
+                    return new ResponseList<LOG_TRUY_CAPInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? result.Count : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseList<LOG_TRUY_CAPInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<LOG_TRUY_CAPInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponsePage<LOG_TRUY_CAPInfo> LOG_TRUY_CAP_GetAllWithPadding(string USER_NAME, string LOG_TIME_START_DATE, string LOG_TIME_END_DATE, string ACTION, string pageIndex, string pageSize)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int totalRecords = 0;
+                    USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                    DateTime _LOG_TIME_START_DATE = LOG_TIME_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(LOG_TIME_START_DATE.Split('-')[2]), int.Parse(LOG_TIME_START_DATE.Split('-')[1]), int.Parse(LOG_TIME_START_DATE.Split('-')[0]), 0, 0, 0);
+                    DateTime _LOG_TIME_END_DATE = LOG_TIME_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(LOG_TIME_END_DATE.Split('-')[2]), int.Parse(LOG_TIME_END_DATE.Split('-')[1]), int.Parse(LOG_TIME_END_DATE.Split('-')[0]), 23, 59, 59);
+                    ACTION = ACTION == "-1" ? string.Empty : ACTION;
+                    List<LOG_TRUY_CAPInfo> result = DataObjectFactory.GetInstanceLOG_TRUY_CAP().LOG_TRUY_CAP_GetAllWithPadding(USER_NAME, _LOG_TIME_START_DATE, _LOG_TIME_END_DATE, ACTION, int.Parse(pageIndex), int.Parse(pageSize), ref totalRecords);
+                    return new ResponsePage<LOG_TRUY_CAPInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = result != null ? totalRecords : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponsePage<LOG_TRUY_CAPInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponsePage<LOG_TRUY_CAPInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    PageIndex = int.Parse(pageIndex),
+                    PageSize = int.Parse(pageSize),
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public Response LOG_TRUY_CAP_EXPORT_TEMPLATE(string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_TRUY_CAP_EXPORT_TEMPLATE.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_TRUY_CAP_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_TRUY_CAP_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+        public Response LOG_TRUY_CAP_EXPORT_DATA(string USER_NAME, string LOG_TIME_START_DATE, string LOG_TIME_END_DATE, string ACTION, string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_TRUY_CAP_EXPORT_DATA.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        int totalRecords = 0;
+                        USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                        DateTime _LOG_TIME_START_DATE = LOG_TIME_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(LOG_TIME_START_DATE.Split('-')[2]), int.Parse(LOG_TIME_START_DATE.Split('-')[1]), int.Parse(LOG_TIME_START_DATE.Split('-')[0]), 0, 0, 0);
+                        DateTime _LOG_TIME_END_DATE = LOG_TIME_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(LOG_TIME_END_DATE.Split('-')[2]), int.Parse(LOG_TIME_END_DATE.Split('-')[1]), int.Parse(LOG_TIME_END_DATE.Split('-')[0]), 23, 59, 59);
+                        ACTION = ACTION == "-1" ? string.Empty : ACTION;
+                        List<LOG_TRUY_CAPInfo> resultLOG_TRUY_CAP = DataObjectFactory.GetInstanceLOG_TRUY_CAP().LOG_TRUY_CAP_GetAllWithPadding(USER_NAME, _LOG_TIME_START_DATE, _LOG_TIME_END_DATE, ACTION, 1, int.MaxValue, ref totalRecords);
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        DataTable dataTableLOG_TRUY_CAP = DataObjectFactory.GetInstanceLOG_TRUY_CAP().ToDataTable(resultLOG_TRUY_CAP);
+                        designer.SetDataSource("LOG_TRUY_CAP", dataTableLOG_TRUY_CAP.DefaultView);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_TRUY_CAP_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_TRUY_CAP_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                            case "pdf":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.pdf", "LOG_TRUY_CAP_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Pdf);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+
+        #endregion
+        #region Create Functions "LOG_XL_HANG_LOAT"
+        public Response LOG_XL_HANG_LOAT_Add(LOG_XL_HANG_LOATInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_XL_HANG_LOAT().Add(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_ADD : Constant.MESSAGE_ERROR_ADD,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_ADD,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_XL_HANG_LOAT_Update(LOG_XL_HANG_LOATInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_XL_HANG_LOAT().Update(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_UPDATE : Constant.MESSAGE_ERROR_UPDATE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_UPDATE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_XL_HANG_LOAT_Delete(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_XL_HANG_LOAT().Delete(int.Parse(ID));
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_DELETE : Constant.MESSAGE_ERROR_DELETE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_DELETE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public ResponseInfo<LOG_XL_HANG_LOATInfo> LOG_XL_HANG_LOAT_GetInfo(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    LOG_XL_HANG_LOATInfo result = DataObjectFactory.GetInstanceLOG_XL_HANG_LOAT().GetInfo(int.Parse(ID));
+                    return new ResponseInfo<LOG_XL_HANG_LOATInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? 1 : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseInfo<LOG_XL_HANG_LOATInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseInfo<LOG_XL_HANG_LOATInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponseList<LOG_XL_HANG_LOATInfo> LOG_XL_HANG_LOAT_GetList()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    List<LOG_XL_HANG_LOATInfo> result = DataObjectFactory.GetInstanceLOG_XL_HANG_LOAT().GetList();
+                    return new ResponseList<LOG_XL_HANG_LOATInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? result.Count : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseList<LOG_XL_HANG_LOATInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<LOG_XL_HANG_LOATInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponsePage<LOG_XL_HANG_LOATInfo> LOG_XL_HANG_LOAT_GetAllWithPadding(string USER_NAME, string FUNCTION_NAME, string TIME_START_DATE, string TIME_END_DATE, string pageIndex, string pageSize)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int totalRecords = 0;
+                    USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                    FUNCTION_NAME = FUNCTION_NAME == "-1" ? string.Empty : FUNCTION_NAME;
+                    DateTime _TIME_START_DATE = TIME_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(TIME_START_DATE.Split('-')[2]), int.Parse(TIME_START_DATE.Split('-')[1]), int.Parse(TIME_START_DATE.Split('-')[0]), 0, 0, 0);
+                    DateTime _TIME_END_DATE = TIME_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(TIME_END_DATE.Split('-')[2]), int.Parse(TIME_END_DATE.Split('-')[1]), int.Parse(TIME_END_DATE.Split('-')[0]), 23, 59, 59);
+                    List<LOG_XL_HANG_LOATInfo> result = DataObjectFactory.GetInstanceLOG_XL_HANG_LOAT().LOG_XL_HANG_LOAT_GetAllWithPadding(USER_NAME, FUNCTION_NAME, _TIME_START_DATE, _TIME_END_DATE, int.Parse(pageIndex), int.Parse(pageSize), ref totalRecords);
+                    return new ResponsePage<LOG_XL_HANG_LOATInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = result != null ? totalRecords : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponsePage<LOG_XL_HANG_LOATInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponsePage<LOG_XL_HANG_LOATInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    PageIndex = int.Parse(pageIndex),
+                    PageSize = int.Parse(pageSize),
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public Response LOG_XL_HANG_LOAT_EXPORT_TEMPLATE(string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_XL_HANG_LOAT_EXPORT_TEMPLATE.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_XL_HANG_LOAT_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_XL_HANG_LOAT_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+        public Response LOG_XL_HANG_LOAT_EXPORT_DATA(string USER_NAME, string FUNCTION_NAME, string TIME_START_DATE, string TIME_END_DATE, string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_XL_HANG_LOAT_EXPORT_DATA.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        int totalRecords = 0;
+                        USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                        FUNCTION_NAME = FUNCTION_NAME == "-1" ? string.Empty : FUNCTION_NAME;
+                        DateTime _TIME_START_DATE = TIME_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(TIME_START_DATE.Split('-')[2]), int.Parse(TIME_START_DATE.Split('-')[1]), int.Parse(TIME_START_DATE.Split('-')[0]), 0, 0, 0);
+                        DateTime _TIME_END_DATE = TIME_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(TIME_END_DATE.Split('-')[2]), int.Parse(TIME_END_DATE.Split('-')[1]), int.Parse(TIME_END_DATE.Split('-')[0]), 23, 59, 59);
+                        List<LOG_XL_HANG_LOATInfo> resultLOG_XL_HANG_LOAT = DataObjectFactory.GetInstanceLOG_XL_HANG_LOAT().LOG_XL_HANG_LOAT_GetAllWithPadding(USER_NAME, FUNCTION_NAME, _TIME_START_DATE, _TIME_END_DATE, 1, int.MaxValue, ref totalRecords);
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        DataTable dataTableLOG_XL_HANG_LOAT = DataObjectFactory.GetInstanceLOG_XL_HANG_LOAT().ToDataTable(resultLOG_XL_HANG_LOAT);
+                        designer.SetDataSource("LOG_XL_HANG_LOAT", dataTableLOG_XL_HANG_LOAT.DefaultView);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_XL_HANG_LOAT_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_XL_HANG_LOAT_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                            case "pdf":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.pdf", "LOG_XL_HANG_LOAT_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Pdf);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+
+        #endregion
+        #region Create Functions "LOG_XL_QUY_TRINH"
+        public Response LOG_XL_QUY_TRINH_Add(LOG_XL_QUY_TRINHInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_XL_QUY_TRINH().Add(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_ADD : Constant.MESSAGE_ERROR_ADD,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_ADD,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_XL_QUY_TRINH_Update(LOG_XL_QUY_TRINHInfo info)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_XL_QUY_TRINH().Update(info);
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_UPDATE : Constant.MESSAGE_ERROR_UPDATE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_UPDATE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public Response LOG_XL_QUY_TRINH_Delete(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int result = DataObjectFactory.GetInstanceLOG_XL_QUY_TRINH().Delete(int.Parse(ID));
+                    return new Response
+                    {
+                        ResultCode = result > 0 ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result > 0 ? Constant.MESSAGE_SUCCESS_DELETE : Constant.MESSAGE_ERROR_DELETE,
+                        ReturnValue = result.ToString()
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = "0"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR_DELETE,
+                    ReturnValue = "0"
+                };
+            }
+        }
+        public ResponseInfo<LOG_XL_QUY_TRINHInfo> LOG_XL_QUY_TRINH_GetInfo(string ID)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    LOG_XL_QUY_TRINHInfo result = DataObjectFactory.GetInstanceLOG_XL_QUY_TRINH().GetInfo(int.Parse(ID));
+                    return new ResponseInfo<LOG_XL_QUY_TRINHInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? 1 : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseInfo<LOG_XL_QUY_TRINHInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseInfo<LOG_XL_QUY_TRINHInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponseList<LOG_XL_QUY_TRINHInfo> LOG_XL_QUY_TRINH_GetList()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    List<LOG_XL_QUY_TRINHInfo> result = DataObjectFactory.GetInstanceLOG_XL_QUY_TRINH().GetList();
+                    return new ResponseList<LOG_XL_QUY_TRINHInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        TotalRecords = result != null ? result.Count : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponseList<LOG_XL_QUY_TRINHInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponseList<LOG_XL_QUY_TRINHInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public ResponsePage<LOG_XL_QUY_TRINHInfo> LOG_XL_QUY_TRINH_GetAllWithPadding(string USER_NAME, string STEP, string LOG_TIME_START_DATE, string LOG_TIME_END_DATE, string ACTION, string pageIndex, string pageSize)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    int totalRecords = 0;
+                    USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                    STEP = STEP == "-1" ? string.Empty : STEP;
+                    DateTime _LOG_TIME_START_DATE = LOG_TIME_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(LOG_TIME_START_DATE.Split('-')[2]), int.Parse(LOG_TIME_START_DATE.Split('-')[1]), int.Parse(LOG_TIME_START_DATE.Split('-')[0]), 0, 0, 0);
+                    DateTime _LOG_TIME_END_DATE = LOG_TIME_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(LOG_TIME_END_DATE.Split('-')[2]), int.Parse(LOG_TIME_END_DATE.Split('-')[1]), int.Parse(LOG_TIME_END_DATE.Split('-')[0]), 23, 59, 59);
+                    ACTION = ACTION == "-1" ? string.Empty : ACTION;
+                    List<LOG_XL_QUY_TRINHInfo> result = DataObjectFactory.GetInstanceLOG_XL_QUY_TRINH().LOG_XL_QUY_TRINH_GetAllWithPadding(USER_NAME, STEP, _LOG_TIME_START_DATE, _LOG_TIME_END_DATE, ACTION, int.Parse(pageIndex), int.Parse(pageSize), ref totalRecords);
+                    return new ResponsePage<LOG_XL_QUY_TRINHInfo>
+                    {
+                        ResultCode = result != null ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = result != null ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = result != null ? totalRecords : 0,
+                        Data = result
+                    };
+                }
+                else
+                {
+                    return new ResponsePage<LOG_XL_QUY_TRINHInfo>
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        PageIndex = int.Parse(pageIndex),
+                        PageSize = int.Parse(pageSize),
+                        TotalRecords = 0,
+                        Data = null
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new ResponsePage<LOG_XL_QUY_TRINHInfo>
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    PageIndex = int.Parse(pageIndex),
+                    PageSize = int.Parse(pageSize),
+                    TotalRecords = 0,
+                    Data = null
+                };
+            }
+        }
+        public Response LOG_XL_QUY_TRINH_EXPORT_TEMPLATE(string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_XL_QUY_TRINH_EXPORT_TEMPLATE.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_XL_QUY_TRINH_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_XL_QUY_TRINH_EXPORT_TEMPLATE");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+        public Response LOG_XL_QUY_TRINH_EXPORT_DATA(string USER_NAME, string STEP, string LOG_TIME_START_DATE, string LOG_TIME_END_DATE, string ACTION, string extension)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Authorization))
+                {
+                    string pathFileExcel = string.Empty;
+                    string designerFile = HttpContext.Current.Server.MapPath("~") + "/Report/Template/LOG_XL_QUY_TRINH_EXPORT_DATA.xlsx";
+                    if (File.Exists(designerFile))
+                    {
+                        int totalRecords = 0;
+                        USER_NAME = USER_NAME == "-1" ? string.Empty : USER_NAME;
+                        STEP = STEP == "-1" ? string.Empty : STEP;
+                        DateTime _LOG_TIME_START_DATE = LOG_TIME_START_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddYears(-10) : new DateTime(int.Parse(LOG_TIME_START_DATE.Split('-')[2]), int.Parse(LOG_TIME_START_DATE.Split('-')[1]), int.Parse(LOG_TIME_START_DATE.Split('-')[0]), 0, 0, 0);
+                        DateTime _LOG_TIME_END_DATE = LOG_TIME_END_DATE == "-1" ? new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59) : new DateTime(int.Parse(LOG_TIME_END_DATE.Split('-')[2]), int.Parse(LOG_TIME_END_DATE.Split('-')[1]), int.Parse(LOG_TIME_END_DATE.Split('-')[0]), 23, 59, 59);
+                        ACTION = ACTION == "-1" ? string.Empty : ACTION;
+                        List<LOG_XL_QUY_TRINHInfo> resultLOG_XL_QUY_TRINH = DataObjectFactory.GetInstanceLOG_XL_QUY_TRINH().LOG_XL_QUY_TRINH_GetAllWithPadding(USER_NAME, STEP, _LOG_TIME_START_DATE, _LOG_TIME_END_DATE, ACTION, 1, int.MaxValue, ref totalRecords);
+                        var designer = new WorkbookDesigner();
+                        var loadOptions = new LoadOptions(LoadFormat.Xlsx);
+                        designer.Workbook = new Workbook(designerFile, loadOptions);
+                        DataTable dataTableLOG_XL_QUY_TRINH = DataObjectFactory.GetInstanceLOG_XL_QUY_TRINH().ToDataTable(resultLOG_XL_QUY_TRINH);
+                        designer.SetDataSource("LOG_XL_QUY_TRINH", dataTableLOG_XL_QUY_TRINH.DefaultView);
+                        designer.Process();
+                        if (!Directory.Exists(HttpContext.Current.Server.MapPath("~") + "/Report/Export"))
+                        {
+                            Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~") + "/Report/Export");
+                        }
+                        switch (extension.ToLower())
+                        {
+                            case "xls":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xls", "LOG_XL_QUY_TRINH_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Excel97To2003);
+                                break;
+                            case "xlsx":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.xlsx", "LOG_XL_QUY_TRINH_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Xlsx);
+                                break;
+                            case "pdf":
+                                pathFileExcel = "/Report/Export/" + String.Format("{0}.pdf", "LOG_XL_QUY_TRINH_EXPORT_DATA");
+                                designer.Workbook.Save(Path.Combine(HttpContext.Current.Server.MapPath("~") + pathFileExcel), SaveFormat.Pdf);
+                                break;
+                        }
+                    }
+                    return new Response
+                    {
+                        ResultCode = !string.IsNullOrEmpty(pathFileExcel) ? Constant.RETURN_CODE_SUCCESS : Constant.RETURN_CODE_ERROR,
+                        Message = !string.IsNullOrEmpty(pathFileExcel) ? Constant.MESSAGE_SUCCESS : Constant.MESSAGE_ERROR,
+                        ReturnValue = "/Services" + pathFileExcel
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = Constant.RETURN_CODE_ERROR,
+                        Message = Constant.MESSAGE_AUT_ERROR,
+                        ReturnValue = string.Empty
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                return new Response
+                {
+                    ResultCode = Constant.RETURN_CODE_ERROR,
+                    Message = Constant.MESSAGE_ERROR,
+                    ReturnValue = string.Empty
+                };
+            }
+        }
+
+        #endregion
+
+    }
+}

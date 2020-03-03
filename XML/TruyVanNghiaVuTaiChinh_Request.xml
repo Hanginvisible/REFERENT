@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HOSOTHUEDTU xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://kekhaithue.gdt.gov.vn/TKhaiThue">
+	<HSOKHAITHUE ID ="_NODE_TO_SIGN">
+		<HEADER>
+			<VERSION>0.0.0.1</VERSION>
+			<SENDER_CODE>CMCLIS</SENDER_CODE>
+			<SENDER_NAME>Hệ thống quản lý đất đai</SENDER_NAME>
+			<RECEIVER_CODE>GOVTAX</RECEIVER_CODE>
+			<RECEIVER_NAME>Cục thuế Hà Nội</RECEIVER_NAME>
+			<TRAN_TYPE>4</TRAN_TYPE>
+			<REQUEST_ID/>
+			<REQUEST_DATE/>
+			<ORIGINAL_CODE/>
+			<ORIGINAL_NAME/>
+			<ORIGINAL_DATE/>
+			<ERROR_CODE/>
+			<ERROR_DESC/>
+		</HEADER>
+		<BODY>
+			<ROW>
+				<THAMSO>
+					<MSG_TYPE/>
+					<MA_HS/>
+					<MA_GCN/>
+					<SO_PHIEU/>
+				</THAMSO>
+			</ROW>
+		</BODY>
+		<SECURITY>
+			<SIGNATURE/>
+			<USERNAME/>
+			<PASSWORD/>
+		</SECURITY>
+	</HSOKHAITHUE>
+</HOSOTHUEDTU>

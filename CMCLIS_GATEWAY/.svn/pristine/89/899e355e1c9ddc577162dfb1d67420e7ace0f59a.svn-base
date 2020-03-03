@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AD39A55B-4F1C-4E80-9EF1-A9854B7483DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMCLIS.GATEWAY.SERVICES</RootNamespace>
+    <AssemblyName>CMCLIS.GATEWAY.SERVICES</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=7.4.1.0, Culture=neutral, PublicKeyToken=00725b1ceb58d0a9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\LIB\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words, Version=13.12.0.0, Culture=neutral, PublicKeyToken=00725b1ceb58d0a9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\LIB\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\CTS.GATEWAY.LIB\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API_CORE_BASE\API_CORE_BASE.cs" />
+    <Compile Include="API_CORE_BASE\IAPI_CORE_BASE.cs" />
+    <Compile Include="API_FILE_SERVER\API_FILE_SERVER.cs" />
+    <Compile Include="API_FILE_SERVER\IAPI_FILE_SERVER.cs" />
+    <Compile Include="API_LOG\API_LOG.cs" />
+    <Compile Include="API_LOG\IAPI_LOG.cs" />
+    <Compile Include="API_LIEN_THONG\API_LIEN_THONG.cs" />
+    <Compile Include="API_LIEN_THONG\IAPI_LIEN_THONG.cs" />
+    <Compile Include="API_BAO_CAO\API_BAO_CAO.cs" />
+    <Compile Include="API_BAO_CAO\IAPI_BAO_CAO.cs" />
+    <Compile Include="API_TIM_KIEM\API_TIM_KIEM.cs" />
+    <Compile Include="API_TIM_KIEM\IAPI_TIM_KIEM.cs" />
+    <Compile Include="API_CHIA_SE\API_CHIA_SE.cs" />
+    <Compile Include="API_CHIA_SE\IAPI_CHIA_SE.cs" />
+    <Compile Include="API_SYSTEMS\API_SYSTEMS.cs" />
+    <Compile Include="API_SYSTEMS\IAPI_SYSTEMS.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="API_AUTHENTICATION\IAPI_AUTHENTICATION.cs" />
+    <Compile Include="API_AUTHENTICATION\API_AUTHENTICATION.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMCLIS.GATEWAY.CORE\CMCLIS.GATEWAY.CORE.csproj">
+      <Project>{cc094dd4-b355-4546-bb48-3629b8f946fb}</Project>
+      <Name>CMCLIS.GATEWAY.CORE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMCLIS.GATEWAY.DATA.OBJECTS\CMCLIS.GATEWAY.DATA.OBJECTS.csproj">
+      <Project>{7967ddf0-949c-421a-8f56-09cfa49b3591}</Project>
+      <Name>CMCLIS.GATEWAY.DATA.OBJECTS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMCLIS.GATEWAY.ENTITY\CMCLIS.GATEWAY.ENTITY.csproj">
+      <Project>{a46618e5-f4f9-403c-933e-b9a52029d235}</Project>
+      <Name>CMCLIS.GATEWAY.ENTITY</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMCLIS.GATEWAY.SETTING\CMCLIS.GATEWAY.SETTING.csproj">
+      <Project>{51576409-0de4-4335-9b92-770c2aa81c42}</Project>
+      <Name>CMCLIS.GATEWAY.SETTING</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

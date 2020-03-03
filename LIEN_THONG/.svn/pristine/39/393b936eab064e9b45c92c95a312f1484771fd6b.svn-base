@@ -1,0 +1,113 @@
+﻿using CMCLIS.CVAN.CORE;
+using CMCLIS.CVAN.CORE.Sercurity;
+using CMCLIS.CVAN.SETTING;
+using CMCLIS.CVAN.ENTITY;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Xml;
+using CMCLIS.CVAN.DATA.OBJECTS;
+
+namespace CMCLIS.CVAN.WServiceMQD
+{
+    public class MQ_PROCESS_DATA
+    {
+        public static object MSGO_INSERT_MSG_XML(string xmlMessage, byte[] file, string sender)
+        {            
+            object result = -1;
+            try
+            {               
+                #region save file
+                Console.WriteLine(" [->] {Save file...}");
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(xmlMessage);
+                string MESSAGE_CODE = xmlDoc.SelectNodes("/DATA/HEADER/MESSAGE_CODE")[0].InnerText;
+                string SENDER_CODE = xmlDoc.SelectNodes("/DATA/HEADER/SENDER_CODE")[0].InnerText;
+                string SENDER_NAME = xmlDoc.SelectNodes("/DATA/HEADER/SENDER_NAME")[0].InnerText;
+                string MESSAGE_TYPE = xmlDoc.SelectNodes("/DATA/HEADER/MESSAGE_TYPE")[0].InnerText;
+
+                if (!Directory.Exists(Config.PATH_DATA_SAVE_FILE + @"\TIEP_NHAN"))
+                {
+                    Directory.CreateDirectory(Config.PATH_DATA_SAVE_FILE + @"\TIEP_NHAN");
+                    if (!Directory.Exists(Config.PATH_DATA_SAVE_FILE + @"\TIEP_NHAN\" + sender))
+                        Directory.CreateDirectory(Config.PATH_DATA_SAVE_FILE + @"\TIEP_NHAN\" + sender);
+                }
+                File.WriteAllText(Config.PATH_DATA_SAVE_FILE + @"\TIEP_NHAN\" + sender + @"\" + MESSAGE_CODE + ".xml", xmlMessage, Encoding.UTF8);
+                Console.WriteLine(" [->] {Save file complete...}");
+                #endregion
+                #region Signature
+                Console.WriteLine(" [->] {Loading X509Certificate2...}");
+                System.Security.Cryptography.X509Certificates.X509Certificate2 cert = Certificate.GetStoreX509Certificate2BySerial(Config.CA_TOKENT_SERIAL);
+                if (cert != null)
+                {
+                    Console.WriteLine(" [->] {Loading X509Certificate2 complete...}");
+                    if (File.Exists(Config.PATH_DATA_SAVE_FILE + @"\TIEP_NHAN\" + Config.MQ_NAME + @"\" + MESSAGE_CODE + ".xml"))
+                    {
+                        XmlDocument xmlDocumentHOSOTHUEDTU = new XmlDocument();
+                        string xmlHOSOTHUEDTU = xmlDoc.SelectNodes("/DATA/BODY/HOSO_THUE")[0].InnerXml;
+                        xmlDocumentHOSOTHUEDTU.LoadXml(xmlHOSOTHUEDTU);
+                        string namespaceURI = xmlDocumentHOSOTHUEDTU.DocumentElement.NamespaceURI;
+                        Console.WriteLine(" [->] {Sign Xml...}");
+                        XmlDocument resultXmlHOSOTHUEDTU = CreateDigitalSignature.SignSignatureXml(xmlDocumentHOSOTHUEDTU, cert, "//NamespaceCode:SIGNATURE", true);
+                        if (resultXmlHOSOTHUEDTU != null)
+                        {
+                            if (!Directory.Exists(Config.PATH_DATA_SAVE_FILE + @"\DATA_SIGNATURE"))
+                                Directory.CreateDirectory(Config.PATH_DATA_SAVE_FILE + @"\DATA_SIGNATURE");
+                            if (!Directory.Exists(Config.PATH_DATA_SAVE_FILE + @"\DATA_SIGNATURE" + @"\" + DateTime.Now.ToString("yyyy-MM-dd")))
+                                Directory.CreateDirectory(Config.PATH_DATA_SAVE_FILE + @"\DATA_SIGNATURE" + @"\" + DateTime.Now.ToString("yyyy-MM-dd"));
+                            string pathSaveFile = Config.PATH_DATA_SAVE_FILE + @"\DATA_SIGNATURE" + @"\" + DateTime.Now.ToString("yyyy-MM-dd") + @"\" + MESSAGE_CODE + ".xml";
+                            using (XmlTextWriter xmlTextWriter = new XmlTextWriter(pathSaveFile, new UTF8Encoding(false)))
+                            {
+                                resultXmlHOSOTHUEDTU.WriteTo(xmlTextWriter);
+                                xmlTextWriter.Close();
+                            }
+                            Console.WriteLine(" [->] {Sign Xml complete...}");
+                            CVAN_MSGOInfo cVAN_MSGOInfo = new CVAN_MSGOInfo
+                            {
+                                CVAN_CODE = MESSAGE_CODE,
+                                CUSER = SENDER_CODE,
+                                CVAN_CONTENT_XML = @"\DATA_SIGNATURE" + @"\" + DateTime.Now.ToString("yyyy-MM-dd") + @"\" + MESSAGE_CODE + ".xml",
+                                CVAN_MSG_TYPE_CODE = MESSAGE_TYPE,
+                                CVAN_MSG_TYPE_NAME = "Hồ địa chính sơ khai thuế",
+                                CVAN_SENDER_CODE = SENDER_CODE,
+                                CVAN_STATUS_SEND = false
+                            };
+                            result = DataObjectFactory.GetInstanceCVAN_MSGO().Add(cVAN_MSGOInfo);
+                            if (result == null || result.ToString() == "-1")
+                                Console.WriteLine(" [->] {INSERT_MSGXML_2_MSGOUT ERROR...}");
+                            else
+                            {
+                                Console.WriteLine(" [->] {INSERT_MSGXML_2_MSGOUT complete...}");
+                                Console.WriteLine(" [->] Sender {" + SENDER_CODE + "}");
+                                Console.WriteLine(" [->] Message {" + MESSAGE_TYPE + "}");
+                                Console.WriteLine(" [->] Message code {" + MESSAGE_CODE + "}");
+                            }
+                        }
+                        
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine(" [->] {Loading X509Certificate2 error...}");
+                }
+
+                return result;
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                LogEventError.LogEvent(System.Reflection.MethodBase.GetCurrentMethod().Name, ex);
+                Console.WriteLine(ex.Message);
+                return -1;
+            }
+
+        }
+
+    }
+}

@@ -1,0 +1,362 @@
+﻿using CMCLIS.GATEWAY.CORE;
+using CMCLIS.GATEWAY.DATA.OBJECTS;
+using CMCLIS.GATEWAY.ENTITY;
+using CMCLIS.GATEWAY.GATEWAY;
+using CMCLIS.GATEWAY.SendMail;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml;
+
+namespace TEST_APP
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CVAN_MAILInfo cVAN_MAILInfo = new CVAN_MAILInfo();
+            cVAN_MAILInfo.CUSER = "CVAN";
+            cVAN_MAILInfo.CVAN_CONTENT = "Test";
+            cVAN_MAILInfo.CVAN_FROM = "nvnghi@cmc.com.vn";
+            cVAN_MAILInfo.CVAN_TO = "vannghi.it@gmail.com";
+            cVAN_MAILInfo.CVAN_TYPE_CODE = "CVAN";
+            cVAN_MAILInfo.CVAN_TYPE_NAME = "CVAN";
+            cVAN_MAILInfo.CVAN_SUBJECT = "CVAN-Test";
+            var result = DataObjectFactory.GetInstanceCVAN_MAIL().Add(cVAN_MAILInfo);
+
+            CVAN_MSGOInfo cVAN_MSGOInfo = new CVAN_MSGOInfo
+            {
+                CVAN_CODE = "aaaaa",
+                CUSER = "aaaaa",
+                CVAN_CONTENT_XML = @"\DATA_SIGNATURE" + @"\" + DateTime.Now.ToString("yyyy-MM-dd") + @"\" + "aaaaa" + ".xml",
+                CVAN_MSG_TYPE_CODE = "aaaaa",
+                CVAN_MSG_TYPE_NAME = "Hồ địa chính sơ khai thuế",
+                CVAN_SENDER_CODE = "aaaaa",
+                
+            };
+            result = DataObjectFactory.GetInstanceCVAN_MSGO().Add(cVAN_MSGOInfo);
+            if (result == null || result.ToString() == "-1")
+                Console.WriteLine(" [->] {INSERT_MSGXML_2_MSGOUT ERROR...}");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var result = DataObjectFactory.GetInstanceCVAN_MAIL().GetInfo(721);
+            if (result != null)
+            {
+
+            }
+        }
+
+        public Response SERVICE_TIEP_NHAN_HO_SO(SERVICE_REQUEST_INFO _SERVICE_REQUEST_INFO,string nodeID)
+        {
+            try
+            {
+                if (_SERVICE_REQUEST_INFO == null)
+                {
+                    return new Response
+                    {
+                        ResultCode =CMCLIS.GATEWAY.SETTING.Constant.RETURN_CODE_ERROR,
+                        Message = CMCLIS.GATEWAY.SETTING.Constant.MESSAGE_NOT_FOUND,
+                        ReturnValue = null
+                    };
+                }
+                if (string.IsNullOrEmpty(_SERVICE_REQUEST_INFO.MESSAGE_TYPE))
+                {
+                    return new Response
+                    {
+                        ResultCode = CMCLIS.GATEWAY.SETTING.Constant.RETURN_CODE_ERROR,
+                        Message = CMCLIS.GATEWAY.SETTING.Constant.MESSAGE_NOT_MESSAGE_TYPE,
+                        ReturnValue = null
+                    };
+                }
+                if (string.IsNullOrEmpty(_SERVICE_REQUEST_INFO.XML_CONTENT))
+                {
+                    return new Response
+                    {
+                        ResultCode = CMCLIS.GATEWAY.SETTING.Constant.RETURN_CODE_ERROR,
+                        Message = CMCLIS.GATEWAY.SETTING.Constant.MESSAGE_NOT_FOUND,
+                        ReturnValue = null
+                    };
+                }
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(_SERVICE_REQUEST_INFO.XML_CONTENT);
+                XmlNodeList xmlNodeList =null;
+                if (string.IsNullOrEmpty(nodeID))
+                {
+                    string namespaceURISign = xmlDocument.DocumentElement.NamespaceURI;
+                    if (!string.IsNullOrEmpty(namespaceURISign))
+                    {
+                        XmlNamespaceManager nsmgrSign = new XmlNamespaceManager(xmlDocument.NameTable);
+                        nsmgrSign.AddNamespace("NamespaceCode", namespaceURISign);
+                        xmlNodeList = xmlDocument.SelectNodes("//NamespaceCode:REQUEST_ID", nsmgrSign);
+                    }
+                }
+                else
+                {
+                    xmlNodeList = xmlDocument.SelectNodes(nodeID);
+                }
+                if (xmlNodeList.Count > 0)
+                {
+                    string maGiaoDich = Guid.NewGuid().ToString().ToUpper();
+                    xmlNodeList[0].InnerText = maGiaoDich;
+                    int result = MQ_PROCESS_DATA.SendToMQ(xmlDocument.OuterXml, null, CMCLIS.GATEWAY.SETTING.Config.MQ_NAME);
+                    return new Response
+                    {
+                        ResultCode = result == 1 ? CMCLIS.GATEWAY.SETTING.Constant.RETURN_CODE_SUCCESS : CMCLIS.GATEWAY.SETTING.Constant.RETURN_CODE_ERROR,
+                        Message = result == 1 ? CMCLIS.GATEWAY.SETTING.Constant.MESSAGE_SUCCESS : CMCLIS.GATEWAY.SETTING.Constant.MESSAGE_ERROR,
+                        ReturnValue = result == 1 ? maGiaoDich : string.Empty
+                    };
+                }
+                else
+                {
+                    return new Response
+                    {
+                        ResultCode = CMCLIS.GATEWAY.SETTING.Constant.RETURN_CODE_ERROR,
+                        Message = CMCLIS.GATEWAY.SETTING.Constant.MESSAGE_NOT_VALIDATE,
+                        ReturnValue = null
+                    };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    ResultCode = CMCLIS.GATEWAY.SETTING.Constant.RETURN_CODE_ERROR,
+                    Message = CMCLIS.GATEWAY.SETTING.Constant.MESSAGE_ERROR,
+                    ReturnValue = null
+                };
+
+            }
+
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SERVICE_REQUEST_INFO _SERVICE_REQUEST_INFO = new SERVICE_REQUEST_INFO()
+            {
+                MESSAGE_TYPE = "HO_SO_DIA_CHINH",
+                XML_CONTENT = Utility.LoadFile(@"C:\Users\vanng_000\Downloads\XML\XML\TNMT_GuiPhieuChuyen_Request.xml")
+            };
+            var response = SERVICE_TIEP_NHAN_HO_SO(_SERVICE_REQUEST_INFO, "/DATA/HEADER/MESSAGE_CODE");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SERVICE_REQUEST_INFO _SERVICE_REQUEST_INFO = new SERVICE_REQUEST_INFO()
+            {
+                MESSAGE_TYPE = "HO_SO_DIA_CHINH",
+                XML_CONTENT = Utility.LoadFile(@"C:\Users\vanng_000\Downloads\XML\XML\TNMT_GuiPhieuChuyen_Request.xml")
+            };
+
+            //string json = new JavaScriptSerializer().Serialize(info);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(_SERVICE_REQUEST_INFO);
+            Response response = HttpWebRequestBase.POST<Response>(json, "http://" + CMCLIS.GATEWAY.SETTING.Config.MICRO_SERVICE_IP + ":" + CMCLIS.GATEWAY.SETTING.Config.MICRO_SERVICE_PORT + "/WebApi/TIEP_NHAN_HO_SO");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(@"C:\Users\vanng_000\Desktop\XML\XML\TNMT_GuiPhieuChuyen_Response.xml");
+            if (xmlDocument != null)
+            {
+                string namespaceURI = xmlDocument.DocumentElement.NamespaceURI;
+                if (!string.IsNullOrEmpty(namespaceURI))
+                {
+                    XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDocument.NameTable);
+                    nsmgr.AddNamespace("NamespaceCode", namespaceURI);
+                    XmlNodeList xmlNodeList = xmlDocument.SelectNodes("//NamespaceCode:SENDER_NAME", nsmgr);
+                    if (xmlNodeList.Count > 0)
+                    {
+                        string a = xmlNodeList[0].InnerXml;
+                        xmlNodeList[0].InnerXml = "AAAAAAAAAAAAAAAAAAAAaa";
+                    }
+                }
+                else
+                {
+                    XmlNodeList xmlNodeList = xmlDocument.SelectNodes("//NamespaceCode:SIGNATURE");
+                    if (xmlNodeList.Count > 0)
+                    {
+                        string a = xmlNodeList[0].OuterXml;
+                    }
+                }
+
+
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var result = DataObjectFactory.GetInstanceCVAN_MSGO().CVAN_MSGO_QuerySolr_GetInfo("419F71D8-0AB4-4C39-8E3D-8C8AA28B0671");
+            if (result != null)
+            {
+                MessageBox.Show(result.CVAN_CODE);
+            }
+            else
+            {
+                MessageBox.Show("Not oke");
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string url = "http://localhost:38241/REST/API_FILE_SERVER/FILE_SERVER_DATA";
+            string path = Path.Combine(@"C:\Users\ABC\Downloads\a.doc");
+            string fileContent = Convert.ToBase64String(File.ReadAllBytes(path));
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                FILE_ID = "",
+                FILE_CONTENT = fileContent,
+                EXTENSION = "doc",
+                DOC_TYPE = "CMT",
+            });
+            Response response = HttpWebRequestBase.POST<Response>(json, url);
+            var a = response;
+            //FileObject fileObject = new FileObject();
+            //fileObject.FILE_CONTENT = fileContent;
+            //fileObject.EXTENSION = "doc";
+            //fileObject.DOC_TYPE = "CMT";
+            //SERVICE_UPLOAD_File(fileObject);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            
+            ResponseInfo<ResponseFileInfo> response = HttpWebRequestBase.GET<ResponseInfo<ResponseFileInfo>>("http://localhost:38241/REST/API_FILE_SERVER/FILE_SERVER_DATA/a69a84eb-c596-4a2a-9b50-ada505a89c47");
+            var a = response;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            bool result = false;
+            MailService.SendMailFromExchange("ntkien5@cmc.com.vn", "Test email", "Test hệ thống mail", ref result);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string MICRO_SERVICE_IP = "localhost";
+            string MICRO_SERVICE_PORT = "6636";
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                IP = "192.168.10.10",
+                PORT = "8663",
+                APPLICATION_NAME = "qldd",
+                MESSAGE = "anh Nguyễn Văn A đã đăng nhập được vào hệ thống",
+                LOG_TYPE = 1,
+                CUSER = "admin"
+            });
+            Response response = HttpWebRequestBase.POST<Response>(json, "http://" + MICRO_SERVICE_IP + ":" + MICRO_SERVICE_PORT + "/LogAPI/POST");
+            var a = response;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string MICRO_SERVICE_IP = "localhost";
+            string MICRO_SERVICE_PORT = "6636";
+            ResponseList<LOG_DATAInfo> response = HttpWebRequestBase.GET<ResponseList<LOG_DATAInfo>>("http://" + MICRO_SERVICE_IP + ":" + MICRO_SERVICE_PORT + "/LogAPI/192.168.10.10/-1/-1/-1/-1/-1/-1");
+            var a = response;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //int totalRecord = 0;
+            //List<CVAN_MSGOInfo> listData = DataObjectFactory.GetInstanceCVAN_MSGO().CVAN_MSGO_GetAllWithPadding(string.Empty, string.Empty, string.Empty, 0, 1, 50, ref totalRecord);
+            //foreach (CVAN_MSGOInfo item in listData)
+            //{
+            //    item.CVAN_STATUS_SEND = decimal.Parse(Constant.MSGO_CVAN_STATUS_SEND_PROCESSING);//đang xử lý
+            //    DataObjectFactory.GetInstanceCVAN_MSGO().Update(item);
+            //}
+            //CommonFunction.DoSomeWork(listData);
+            //List<CVAN_MSGOInfo> listAll = DataObjectFactory.GetInstanceCVAN_MSGO().GetList();
+            //foreach (CVAN_MSGOInfo item in listAll)
+            //{
+            //    string pathFile = Path.Combine(string.Format("{0}{1}", Config.PATH_DATA_SAVE_FILE, item.CVAN_CONTENT_XML));
+            //    if (!File.Exists(pathFile))
+            //    {
+            //        DataObjectFactory.GetInstanceCVAN_MSGO().Delete(int.Parse(item.ID.ToString()));
+            //    }
+            //}
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            SERVICE_REQUEST_INFO _SERVICE_REQUEST_INFO = new SERVICE_REQUEST_INFO()
+            {
+                MESSAGE_TYPE = "10",
+                XML_CONTENT = Utility.LoadFile(@"C:\DataFileInput\GuiPhieuChuyen_Request.xml")
+            };
+            var response = SERVICE_TIEP_NHAN_HO_SO(_SERVICE_REQUEST_INFO, "/DATA/HEADER/MESSAGE_CODE");
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            SERVICE_REQUEST_INFO _SERVICE_REQUEST_INFO = new SERVICE_REQUEST_INFO()
+            {
+                MESSAGE_TYPE = "17",
+                XML_CONTENT = Utility.LoadFile(@"C:\DataFileInput\TruyVanHoSoScan_Request.xml")
+            };
+            var response = SERVICE_TIEP_NHAN_HO_SO(_SERVICE_REQUEST_INFO, "");
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            SERVICE_REQUEST_INFO _SERVICE_REQUEST_INFO = new SERVICE_REQUEST_INFO()
+            {
+                MESSAGE_TYPE = "14",
+                XML_CONTENT = Utility.LoadFile(@"C:\DataFileInput\TruyVanThongBaoThue_Request.xml")
+            };
+            var response = SERVICE_TIEP_NHAN_HO_SO(_SERVICE_REQUEST_INFO, "");
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            SERVICE_REQUEST_INFO _SERVICE_REQUEST_INFO = new SERVICE_REQUEST_INFO()
+            {
+                MESSAGE_TYPE = "16",
+                XML_CONTENT = Utility.LoadFile(@"C:\DataFileInput\TruyVanNghiaVuTaiChinh_Request.xml")
+            };
+            var response = SERVICE_TIEP_NHAN_HO_SO(_SERVICE_REQUEST_INFO, "");
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            string path = @"D:\data.xml";
+            byte[] datacontent = File.ReadAllBytes(path);
+            string content64 = Convert.ToBase64String(datacontent);
+            var a = 1;
+            //int totalRecord = 0;
+            //int pageSize = 0;
+            //string pageSizeValue = CMCLIS.GATEWAY.SETTING.Config.PAGE_SIZE;
+            //int.TryParse(pageSizeValue, out pageSize);
+            //if (pageSize == 0) pageSize = 50;
+
+            //List<CVAN_EXCHANGEInfo> listData = DataObjectFactory.GetInstanceCVAN_EXCHANGE().CVAN_EXCHANGE_GetAllWithPadding("0", "", "", 1, pageSize, ref totalRecord);
+            //foreach (CVAN_EXCHANGEInfo item in listData)
+            //{
+            //    item.CVAN_STATUS_CODE = Constant.EXCHANGE_CVAN_STATUS_PROCESSING;
+            //    DataObjectFactory.GetInstanceCVAN_EXCHANGE().Update(item);
+            //}
+            //CMCLIS.GATEWAY.WServiceReponse.CommonFunction.DoSomeWork(listData);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            CMCLIS.GATEWAY.WServiceMQMail.CommonFunction.ConsumeQueue();
+        }
+    }
+}
